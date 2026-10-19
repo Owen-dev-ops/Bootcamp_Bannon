@@ -2,12 +2,14 @@
 
 package financecalculator;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
-
+import financecalculator.calculators.MortgageCalculator;
+import financecalculator.calculators.FutureValueCalculator;
+import financecalculator.calculators.PresentValueCalculator;
 
 public class App {
 
+    // Used to verify user inputs of type double
     public static double inputDouble (Scanner s, String msg) {
         try {
             return s.nextDouble();
@@ -18,6 +20,7 @@ public class App {
         }
     }
 
+    /* No longer in use, decided to only use doubles for calculations to prevent math errors from different data types.
     public static float inputFloat(Scanner s, String msg) {
         try {
             return s.nextFloat();
@@ -37,6 +40,8 @@ public class App {
             return -1;
         }
     }
+    */
+
 
     public static void main(String[] args) {
 
@@ -61,7 +66,7 @@ public class App {
                 answer = answer.toLowerCase();
                 switch (answer) {
                     case "1", "mortgage", "mortgage calculator", "mort calc", "mortgage calc" -> {
-                        System.out.println("Mortgage was selected.");
+                        System.out.println("Mortgage calculator was selected.");
                         answer = "1";
                         validAnswer = true;
                         break;
@@ -89,14 +94,15 @@ public class App {
             }
 
             // Ask user for financial information correlating with the calculation they would like to complete.
+            // Then validate their input, calculate values, and display to user.
             double amount = 0L;
-            float interest = 0f;
-            int years = 0;
+            double interest = 0f;
+            double years = 0;
             validAnswer = false;
 
             switch (answer) {
                 case "1" -> {
-                    System.out.println("Please enter the following information in order to calculate monthly mortgage payment:");
+                    System.out.println("Please enter the following information in order to calculate monthly mortgage payment and total interest:");
                     System.out.print("- Principal Balance in Dollars: ");
                     while (!validAnswer) {
                         String message = "Please enter a valid dollar amount:";
@@ -109,7 +115,7 @@ public class App {
                     System.out.print("- Annual Interest Rate as a percent: ");
                     while (!validAnswer) {
                         String message = "Please enter a valid interest rate listed as a percent:";
-                        interest = App.inputFloat(scanner, message);
+                        interest = App.inputDouble(scanner, message);
                         if (interest != -1) {
                             validAnswer = true;
                         }
@@ -118,16 +124,22 @@ public class App {
                     System.out.print("- Loan Term in Years: ");
                     while (!validAnswer) {
                         String message = "Please enter a valid number of years:";
-                        years = App.inputInt(scanner, message);
+                        years = App.inputDouble(scanner, message);
                         if (years != -1) {
                             validAnswer = true;
                         }
                     }
                     validAnswer = false;
+
+                    // Calculate total interest and monthly payment amount
+                    double totalInterest = MortgageCalculator.calculateTotalInterest(amount, interest, years);
+                    double monthlyPayment = MortgageCalculator.calculateMonthlyPayment(amount, interest, years);
+                    System.out.printf("Total Interest: $%,.2f\n", totalInterest);
+                    System.out.printf("Monthly Payment Amount: $%,.2f\n", monthlyPayment);
                     break;
                 }
                 case "2" -> {
-                    System.out.println("Please enter the following information in order to calculate the future value of a CD:");
+                    System.out.println("Please enter the following information in order to calculate the future value of a CD and total interest earned:");
                     System.out.print("- Amount of initial deposit in dollars: ");
                     while (!validAnswer) {
                         String message = "Please enter a valid dollar amount:";
@@ -140,7 +152,7 @@ public class App {
                     System.out.print("- Annual interest rate as a percent: ");
                     while (!validAnswer) {
                         String message = "Please enter a valid interest rate listed as a percent:";
-                        interest = App.inputFloat(scanner, message);
+                        interest = App.inputDouble(scanner, message);
                         if (interest != -1) {
                             validAnswer = true;
                         }
@@ -149,12 +161,18 @@ public class App {
                     System.out.print("- Length of CD in years: ");
                     while (!validAnswer) {
                         String message = "Please enter a valid number of years:";
-                        years = App.inputInt(scanner, message);
+                        years = App.inputDouble(scanner, message);
                         if (years != -1) {
                             validAnswer = true;
                         }
                     }
                     validAnswer = false;
+
+                    // Calculate future value and total interest earned amount
+                    double futureValue = FutureValueCalculator.calculateFutureValue(amount, interest, years);
+                    double totaleInterestEarned = FutureValueCalculator.calculateTotalInterestEarned(amount, interest, years);
+                    System.out.printf("Future Value of CD: $%,.2f\n", futureValue);
+                    System.out.printf("Total Interest Earned: $%,.2f\n", totaleInterestEarned);
                     break;
                 }
                 case "3" -> {
@@ -171,7 +189,7 @@ public class App {
                     System.out.print("- Expected annual interest rate as a percent: ");
                     while(!validAnswer) {
                         String message = "Please enter a valid interest rate listed as a percent:";
-                        interest = App.inputFloat(scanner, message);
+                        interest = App.inputDouble(scanner, message);
                         if (interest != -1) {
                             validAnswer = true;
                         }
@@ -180,7 +198,7 @@ public class App {
                     System.out.print("- Number of years the annuity pays: ");
                     while (!validAnswer) {
                         String message = "Please enter a valid number of years:";
-                        years = App.inputInt(scanner, message);
+                        years = App.inputDouble(scanner, message);
                         if (years != -1) {
                             validAnswer = true;
                         }
