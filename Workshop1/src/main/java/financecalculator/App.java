@@ -51,7 +51,7 @@ public class App {
         Scanner scanner = new Scanner(System.in);
 
         // Main Program Loop
-        while (quitProgram == false) {
+        while (!quitProgram) {
             // Ask user which calculator they would like to use
             System.out.println("Which calculator would you like to use? \n" +
                     "1: Mortgage Calculator \n" +
@@ -59,7 +59,7 @@ public class App {
                     "3: Present Value Calculator \n" +
                     "Or \n" +
                     "4: Close Calculator");
-
+            validAnswer = false;
             // Verify user input
             while (!validAnswer) {
                 answer = scanner.nextLine();
@@ -203,6 +203,11 @@ public class App {
                             validAnswer = true;
                         }
                     }
+                    validAnswer = false;
+
+                    // Calculate present value
+                    double presentValue = PresentValueCalculator.calculatePresentValue(amount, interest, years);
+                    System.out.printf("Present Value of Ordinary Annuity: $%,.2f\n", presentValue);
                     break;
                 }
                 case "4" -> {
@@ -211,18 +216,30 @@ public class App {
                     break;
                 }
             }
-            System.out.println("success!");
-            quitProgram = true;
-            // Using the correlating class from the calculators package, calculate the requested value.
 
-            // Print to user
-
-            // Ask if the user would like to select another calculator or quit program.
-                // if the user selects continue just don't change the value of quitProgram and the program will repeat
-
-                // else
-                    // print goodbye
-                    // quitProgram = true
+            // If user hasn't already decided to exit the calculator ask them if they would like to continue calculating
+            if (!quitProgram) {
+                System.out.println("Continue calculating?:");
+                scanner.nextLine();
+                while (!validAnswer) {
+                    answer = scanner.nextLine();
+                    answer = answer.toLowerCase();
+                    switch (answer) {
+                        case "y", "yes", "1" -> {
+                            validAnswer = true;
+                            answer = "";
+                            break;
+                        }
+                        case "n", "no", "0", "-1" -> {
+                            quitProgram = true;
+                            validAnswer = true;
+                            break;
+                        }
+                        default ->
+                            System.out.println("Please enter: y, yes, n, no, etc...");
+                    }
+                }
+            }
         }
         scanner.close();
     }
