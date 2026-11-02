@@ -1,5 +1,3 @@
-date|time|description|vendor|amount
+date|time|description|vendor|transactionAmount
 2023-04-15|10:13:25|ergonomic keyboard|Amazon|-89.50
 2023-04-15|11:15:00|Invoice 1001 paid|Joe|1500.00
-2026-11-02|09:30:05|breakfast|Starbucks|-12.74
-2026-11-02|09:30:05|breakfast|Starbucks|-12.74

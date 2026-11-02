@@ -52,8 +52,8 @@ public class FileManager {
                     transaction.getTransactionDate(),
                     transaction.getTransactionTime(),
                     transaction.getTransactionDescription(),
-                    transaction.getVendor(),
-                    transaction.getAmount());
+                    transaction.getTransactionVendor(),
+                    transaction.getTransactionAmount());
 
             bufferedWriter.flush();
             bufferedWriter.newLine();

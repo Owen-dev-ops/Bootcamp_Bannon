@@ -10,16 +10,16 @@ public class Transaction {
     private LocalDate transactionDate;
     private LocalTime transactionTime;
     private String transactionDescription;
-    private String vendor;
-    private double amount;
+    private String transactionVendor;
+    private double transactionAmount;
 
     // Constructor
-    public Transaction(LocalDate transactionDate, LocalTime transactionTime, String transactionDescription, String vendor, double amount) {
+    public Transaction(LocalDate transactionDate, LocalTime transactionTime, String transactionDescription, String vendor, double transactionAmount) {
         this.transactionDate = transactionDate;
         this.transactionTime = transactionTime;
         this.transactionDescription = transactionDescription;
-        this.vendor = vendor;
-        this.amount = amount;
+        this.transactionVendor = vendor;
+        this.transactionAmount = transactionAmount;
     }
 
     // setters/getters
@@ -47,20 +47,20 @@ public class Transaction {
         this.transactionDescription = transactionDescription;
     }
 
-    public String getVendor() {
-        return vendor;
+    public String getTransactionVendor() {
+        return transactionVendor;
     }
 
-    public void setVendor(String vendor) {
-        this.vendor = vendor;
+    public void setTransactionVendor(String transactionVendor) {
+        this.transactionVendor = transactionVendor;
     }
 
-    public double getAmount() {
-        return amount;
+    public double getTransactionAmount() {
+        return transactionAmount;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setTransactionAmount(double transactionAmount) {
+        this.transactionAmount = transactionAmount;
     }
 
     // Behaviors
@@ -70,8 +70,8 @@ public class Transaction {
                 "transactionDate=" + transactionDate +
                 ", transactionTime=" + transactionTime +
                 ", transactionDescription='" + transactionDescription + '\'' +
-                ", vendor='" + vendor + '\'' +
-                ", amount=" + amount +
+                ", vendor='" + transactionVendor + '\'' +
+                ", transactionAmount=" + transactionAmount +
                 '}';
     }
 }
