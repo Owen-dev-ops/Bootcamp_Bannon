@@ -3,7 +3,7 @@ package library;
 public class LibraryData {
     private LibraryData() {}
 
-    // books holds all the books in the library. Rows 0-25 represent A-Z, and columns 0-4 show the books in the library which start with that correlating letter.
+    // books holds all the books in the library.
     public static Book[] books = {
             // A
                     new Book(0, "Animal Farm", "9780451526342", false, "None"),
