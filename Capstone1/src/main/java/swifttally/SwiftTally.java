@@ -7,6 +7,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class SwiftTally {
@@ -78,17 +79,15 @@ public class SwiftTally {
 
     // Add a credit transaction to transactions.psv
     public static void postCredit(List<Transaction> transactions, Scanner s){
-        System.out.println("Please enter credit transaction info:");
+        System.out.println("Please enter credit transaction info or c at anytime to cancel:");
         addTransaction(transactions, s, 0);
-        System.out.println("Credit transaction added successfully, returning you to menu...");
     }
 
 
     // Add a debit transaction to transactions.psv
     public static void postDebit(List<Transaction> transactions, Scanner s){
-        System.out.println("Please enter debit transaction info: ");
+        System.out.println("Please enter debit transaction info or c at anytime to cancel: ");
         addTransaction(transactions, s, 1);
-        System.out.println("Debit transaction added successfully, returning you to menu...");
     }
 
 
@@ -148,7 +147,12 @@ public class SwiftTally {
                     while (!validAnswer) {
                         System.out.print("Date: ");
                         try {
-                            userInput[i] = LocalDate.parse(s.nextLine(), Constants.DTF);
+                            userInput[i] = s.nextLine().toLowerCase();
+                            if(userInput[i].equals("c")){
+                                System.out.println("transaction canceled, returning you to menu...");
+                                return;
+                            }
+                            userInput[i] = LocalDate.parse((String)userInput[i], Constants.DTF);
                             validAnswer = true;
                         } catch (Exception ex) {
                             System.out.println("Invalid date, please enter using this format: yyyy-mm-dd. Ex: 2004-07-15");
@@ -159,7 +163,12 @@ public class SwiftTally {
                     while (!validAnswer) {
                         System.out.print("Time: ");
                         try {
-                            userInput[i] = LocalTime.parse(s.nextLine(), Constants.TF);
+                            userInput[i] = s.nextLine().toLowerCase();
+                            if(userInput[i].equals("c")){
+                                System.out.println("transaction canceled, returning you to menu...");
+                                return;
+                            }
+                            userInput[i] = LocalTime.parse((String)userInput[i], Constants.TF);
                             validAnswer = true;
                         } catch (Exception ex) {
                             System.out.println("Invalid time, please enter using this format: HH:mm:ss. Ex: 10:13:25");
@@ -169,16 +178,29 @@ public class SwiftTally {
                 case 2:
                     System.out.print("Description: ");
                     userInput[i] = s.nextLine();
+                    if(((String) userInput[i]).equalsIgnoreCase("c")){
+                        System.out.println("transaction canceled, returning you to menu...");
+                        return;
+                    }
                     break;
                 case 3:
                     System.out.print("Vendor: ");
                     userInput[i] = s.nextLine();
+                    if(((String) userInput[i]).equalsIgnoreCase("c")){
+                        System.out.println("transaction canceled, returning you to menu...");
+                        return;
+                    }
                     break;
                 case 4:
                     System.out.print("Amount: ");
                     while (!validAnswer) {
                         try {
-                            userInput[i] = Double.parseDouble(s.nextLine());
+                            userInput[i] = s.nextLine().toLowerCase();
+                            if(userInput[i].equals("c")){
+                                System.out.println("transaction canceled, returning you to menu...");
+                                return;
+                            }
+                            userInput[i] = Double.parseDouble((String)userInput[i]);
                             if (creditOrDebit == 0) {
                                 if ((double) userInput[i] < 0) {
                                     System.out.println("Amount for credit transactions must be a positive value: ");
@@ -204,5 +226,11 @@ public class SwiftTally {
         transactions.add(newTransaction);
 
         FileManager.writeToFile(newTransaction);
+
+        if(creditOrDebit == 0){
+            System.out.println("Credit transaction added successfully, returning you to menu...");
+        }else if(creditOrDebit == 1){
+            System.out.println("Debit transaction added successfully, returning you to menu...");
+        }
     }
 }

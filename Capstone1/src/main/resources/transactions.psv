@@ -3,3 +3,6 @@ date|time|description|vendor|transactionAmount
 2023-04-15|11:15:00|Invoice 1001 paid|Joe|1500.00
 2026-04-04|10:00|Credit Test|Owen|50.00
 2020-06-12|09:15:15|Debit test|Owen|-60.00
+2026-10-04|10:00|NEW NEW CREDIT TEST|Owen|10.00
+2026-04-04|10:00|Another credit test|Cabellas|25.00
+2026-04-04|10:00|another debit test|Bentley|-2050.69
