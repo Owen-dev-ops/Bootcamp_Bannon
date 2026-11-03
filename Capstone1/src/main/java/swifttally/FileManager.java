@@ -58,7 +58,7 @@ public class FileManager {
             bufferedWriter.flush();
             bufferedWriter.newLine();
             bufferedWriter.write(newLine);
-            System.out.println("New transaction added to transaction.psv\n");
+            // System.out.println("New transaction added to transaction.psv\n");
 
             bufferedWriter.close();
             fileWriter.close();

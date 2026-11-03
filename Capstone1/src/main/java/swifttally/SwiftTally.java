@@ -78,75 +78,17 @@ public class SwiftTally {
 
     // Add a credit transaction to transactions.psv
     public static void postCredit(List<Transaction> transactions, Scanner s){
-        // get credit transaction from user
-        Object[] userInput = new Object[5];
-        System.out.println("Please enter transaction info:");
-        for(int i = 0; i <= userInput.length; i++){
-            boolean validAnswer = false;
-            switch(i){
-                case 0:
-                    while(!validAnswer){
-                        System.out.print("Date: ");
-                        try {
-                            userInput[i] = LocalDate.parse(s.nextLine(), Constants.DTF);
-                            validAnswer = true;
-                        } catch (Exception ex) {
-                            System.out.println("Invalid date, please enter using this format: yyyy-mm-dd. Ex: 2004-07-15");
-                        }
-                    }
-                    break;
-                case 1:
-                    while(!validAnswer){
-                        System.out.print("Time: ");
-                        try{
-                            userInput[i] = LocalTime.parse(s.nextLine(), Constants.TF);
-                            validAnswer = true;
-                        }catch(Exception ex){
-                            System.out.println("Invalid time, please enter using this format: HH:mm:ss. Ex: 10:13:25");
-                        }
-                    }
-                    break;
-                case 2:
-                    System.out.print("Description: ");
-                    userInput[i] = s.nextLine();
-                    break;
-                case 3:
-                    System.out.print("Vendor: ");
-                    userInput[i] = s.nextLine();
-                    break;
-                case 4:
-                    System.out.print("Amount: ");
-                    while(!validAnswer){
-                        try {
-                            userInput[i] = Double.parseDouble(s.nextLine());
-                            validAnswer = true;
-                        } catch (Exception ex) {
-                            System.out.println("Invalid amount, please enter a valid dollar amount using this format: $$.cc. Ex: 50.32, 1032.06");
-                        }
-                    }
-                    break;
-                default:
-            }
-        }
-            // ask for date, time, description, vendor and amount one at a time and at each step allow the user to keep entering values until one is valid or allow user to cancel and break out of function
-
-        // make a new transaction instance with the values the user provided
-        Transaction newCreditTransaction = new Transaction((LocalDate) userInput[0], (LocalTime)userInput[1], (String)userInput[2], (String)userInput[3], (double)userInput[4]);
-
-        transactions.add(newCreditTransaction);
+        System.out.println("Please enter credit transaction info:");
+        addTransaction(transactions, s, 0);
         System.out.println("Credit transaction added successfully, returning you to menu...");
     }
 
 
     // Add a debit transaction to transactions.psv
     public static void postDebit(List<Transaction> transactions, Scanner s){
-        // get debit transaction from user
-        // ask for date, time, description, vendor and amount one at a time and at each step allow the user to keep entering values until one is valid or allow user to cancel and break out of function
-
-        // make a new transaction instance with the values the user provided
-
-        // transactions.add(newTransaction)
-        System.out.println("What would you like to do next? (Enter h or help for options menu)");
+        System.out.println("Please enter debit transaction info: ");
+        addTransaction(transactions, s, 1);
+        System.out.println("Debit transaction added successfully, returning you to menu...");
     }
 
 
@@ -191,5 +133,76 @@ public class SwiftTally {
     public static void Search(List<Transaction> transactions, Scanner s) {
 
         System.out.println("What would you like to do next? (Enter h or help for options menu)");
+    }
+
+
+    // Ask user for required info to add a new transaction. Call function with int 0 to add a credit transaction or 1 for debit transactions.
+    public static void addTransaction(List<Transaction> transactions, Scanner s, int creditOrDebit){
+        // if creditOrDebit = 0 then add a credit transaction, otherwise add a debit transaction. This is required as for credits the code below ensures the user entered a postive value as well as it ensures a negative value is entered for debits.
+
+        Object[] userInput = new Object[5];
+        for(int i = 0; i <= userInput.length; i++) {
+            boolean validAnswer = false;
+            switch (i) {
+                case 0:
+                    while (!validAnswer) {
+                        System.out.print("Date: ");
+                        try {
+                            userInput[i] = LocalDate.parse(s.nextLine(), Constants.DTF);
+                            validAnswer = true;
+                        } catch (Exception ex) {
+                            System.out.println("Invalid date, please enter using this format: yyyy-mm-dd. Ex: 2004-07-15");
+                        }
+                    }
+                    break;
+                case 1:
+                    while (!validAnswer) {
+                        System.out.print("Time: ");
+                        try {
+                            userInput[i] = LocalTime.parse(s.nextLine(), Constants.TF);
+                            validAnswer = true;
+                        } catch (Exception ex) {
+                            System.out.println("Invalid time, please enter using this format: HH:mm:ss. Ex: 10:13:25");
+                        }
+                    }
+                    break;
+                case 2:
+                    System.out.print("Description: ");
+                    userInput[i] = s.nextLine();
+                    break;
+                case 3:
+                    System.out.print("Vendor: ");
+                    userInput[i] = s.nextLine();
+                    break;
+                case 4:
+                    System.out.print("Amount: ");
+                    while (!validAnswer) {
+                        try {
+                            userInput[i] = Double.parseDouble(s.nextLine());
+                            if (creditOrDebit == 0) {
+                                if ((double) userInput[i] < 0) {
+                                    System.out.println("Amount for credit transactions must be a positive value: ");
+                                    throw new RuntimeException();
+                                }
+                            } else if (creditOrDebit == 1) {
+                                if ((double) userInput[i] > 0) {
+                                    System.out.println("Amount for debit transactions must be a negative value: ");
+                                    throw new RuntimeException();
+                                }
+                            }
+                            validAnswer = true;
+                        } catch (Exception ex) {
+                            System.out.println("Invalid amount, please enter a valid dollar amount using this format: $$.cc. Ex: 50.32, 1032.06");
+                        }
+                    }
+                    break;
+                default:
+            }
+        }
+        Transaction newTransaction = new Transaction((LocalDate) userInput[0], (LocalTime)userInput[1], (String)userInput[2], (String)userInput[3], (double)userInput[4]);
+
+        transactions.add(newTransaction);
+
+        FileManager.writeToFile(newTransaction);
     }
 }
