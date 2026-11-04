@@ -41,7 +41,7 @@ public class TransactionHandler {
                                 System.out.println("transaction canceled, returning you to menu...");
                                 return;
                             }
-                            userInput[i] = LocalDate.parse((String)userInput[i], Constants.DTF);
+                            userInput[i] = LocalDate.parse((String)userInput[i], Constants.LDTF);
                             validAnswer = true;
                         } catch (Exception ex) {
                             System.out.println("Invalid date, please enter using this format: yyyy-mm-dd. Ex: 2004-07-15");
@@ -57,7 +57,7 @@ public class TransactionHandler {
                                 System.out.println("transaction canceled, returning you to menu...");
                                 return;
                             }
-                            userInput[i] = LocalTime.parse((String)userInput[i], Constants.TF);
+                            userInput[i] = LocalTime.parse((String)userInput[i], Constants.DTF);
                             validAnswer = true;
                         } catch (Exception ex) {
                             System.out.println("Invalid time, please enter using this format: HH:mm:ss. Ex: 10:13:25");

@@ -36,31 +36,39 @@ public class DirectUser {
     }
 
     // Direct user based off input (Search Menu)
-    public static void directUserSearchMenu(String userInput, List<Transaction> transactions, Scanner s) {
+    public static boolean directUserSearchMenu(String userInput, List<Transaction> transactions, Scanner s, boolean validAnswer) {
         switch (userInput) {
             case "mtd", "month-todate-search":
                 Search.monthToDate(transactions);
+                validAnswer = true;
                 break;
             case "pms", "previous-month-search":
                 Search.previousMonth(transactions);
+                validAnswer = true;
                 break;
             case "ytd", "year-todate-search":
                 Search.yearToDate(transactions);
+                validAnswer = true;
                 break;
             case "pys", "previous-year-search":
                 Search.previousYear(transactions);
+                validAnswer = true;
                 break;
-            case "vs", "vendor-serach":
+            case "vs", "vendor-search":
                 Search.searchByVendor(transactions, s);
+                validAnswer = true;
                 break;
             case "cs", "custom-search":
                 Search.customSearch(transactions, s);
+                validAnswer = true;
                 break;
             case "b", "back":
-                System.out.println("Goodbye");
+                System.out.println("Returning to menu...");
+                validAnswer = true;
                 break;
             default:
                 System.out.println("Please see below for valid search commands:");
         }
+        return validAnswer;
     }
 }
