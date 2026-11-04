@@ -13,6 +13,8 @@ public class Constants {
     /* Formats dates */
     // LocalDateTime formatter
     public static final DateTimeFormatter LDTF = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    // LocalDateTime, only the year format
+    public static final DateTimeFormatter LDTFY = DateTimeFormatter.ofPattern("yyyy");
     // LocalDateTime, only the month format
     public static final DateTimeFormatter LDTFM = DateTimeFormatter.ofPattern("MM");
     // LocalTime formatter

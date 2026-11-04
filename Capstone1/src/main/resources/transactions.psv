@@ -13,3 +13,7 @@ date|time|description|vendor|transactionAmount
 1000-12-04|13:01:59|Test|test|-50.32
 2026-11-04|10:00|month to date test|month to date inc|20.00
 2026-11-02|09:15:04|Month to date test|month to date test inc|-25.25
+2026-10-01|10:00|previous month search test|previous month search test inc|25.98
+2024-10-02|10:00|test|test|-20.00
+2024-11-04|19:04:02|test|test|25.00
+2024-10-10|10:00|test|test|20.00

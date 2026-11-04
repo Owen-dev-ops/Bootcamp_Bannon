@@ -39,28 +39,34 @@ public class DirectUser {
     public static boolean directUserSearchMenu(String userInput, List<Transaction> transactions, Scanner s, boolean validAnswer) {
         switch (userInput) {
             case "mtd", "month-todate-search":
+                System.out.println("Search Results:\n---------------------------------------------------------------------------------------------------------------------");
                 Search.monthToDate(transactions);
-                validAnswer = true;
+                System.out.println("Continue searching?:");
                 break;
             case "pms", "previous-month-search":
+                System.out.println("Search Results:\n---------------------------------------------------------------------------------------------------------------------");
                 Search.previousMonth(transactions);
-                validAnswer = true;
+                System.out.println("Continue searching?:");
                 break;
             case "ytd", "year-todate-search":
+                System.out.println("Search Results:\n---------------------------------------------------------------------------------------------------------------------");
                 Search.yearToDate(transactions);
-                validAnswer = true;
+                System.out.println("Continue searching?:");
                 break;
             case "pys", "previous-year-search":
+                System.out.println("Search Results:\n---------------------------------------------------------------------------------------------------------------------");
                 Search.previousYear(transactions);
-                validAnswer = true;
+                System.out.println("Continue searching?:");
                 break;
             case "vs", "vendor-search":
+                System.out.println("Search Results:\n---------------------------------------------------------------------------------------------------------------------");
                 Search.searchByVendor(transactions, s);
-                validAnswer = true;
+                System.out.println("Continue searching?:");
                 break;
             case "cs", "custom-search":
+                System.out.println("Search Results:\n---------------------------------------------------------------------------------------------------------------------");
                 Search.customSearch(transactions, s);
-                validAnswer = true;
+                System.out.println("Continue searching?:");
                 break;
             case "b", "back":
                 System.out.println("Returning to menu...");

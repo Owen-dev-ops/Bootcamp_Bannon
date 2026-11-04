@@ -30,10 +30,11 @@ public class Search {
         LocalDateTime currentLocalDate = LocalDateTime.now();
         // Get the current month from currentLocalDate and hold this valud in a String, currentMonth
         String currentMonth = Constants.LDTFM.format(currentLocalDate);
+        String currentYear = Constants.LDTFY.format(currentLocalDate);
 
-        // For each transaction within transactions if the month matches the current month, print it to the user
+        // For each transaction within transactions if the year matches the current year and the month matches the current month, print it to the user
         for(Transaction transaction : transactions){
-            if(Constants.LDTFM.format(transaction.getTransactionDate()).equals(currentMonth)){
+            if(Constants.LDTFM.format(transaction.getTransactionDate()).equals(currentMonth) && Constants.LDTFY.format(transaction.getTransactionDate()).equals(currentYear)){
                 transaction.printTransaction();
             }
         }
@@ -41,6 +42,20 @@ public class Search {
 
     // Return list of all transactions made during last month
     public static void previousMonth(List<Transaction> transactions){
+        // Get the current local date
+        LocalDateTime currentLocalDate = LocalDateTime.now();
+        // Make a new date starting on the first day of last month
+        LocalDateTime previousMonthLocalDate = LocalDateTime.of(Integer.parseInt(Constants.LDTFY.format(currentLocalDate)), Integer.parseInt(Constants.LDTFM.format(currentLocalDate)) - 1, 1, 1, 1);
+        // Get the previous month from the previousMonthLocalDate
+        String previousMonth = Constants.LDTFM.format(previousMonthLocalDate);
+        String currentYear = Constants.LDTFY.format(previousMonthLocalDate);
+
+        // For each transaction within transactions if year matches the current year and the month matches the previous month, print it to the user
+        for(Transaction transaction : transactions){
+            if(Constants.LDTFM.format(transaction.getTransactionDate()).equals(previousMonth) && Constants.LDTFY.format(transaction.getTransactionDate()).equals(currentYear)){
+                transaction.printTransaction();
+            }
+        }
 
     }
 
