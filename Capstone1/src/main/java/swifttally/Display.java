@@ -16,6 +16,18 @@ public class Display {
                 "%sExit Swift Tally%s                  : e, exit\n", Constants.BOLD, Constants.RESET, Constants.BOLD, Constants.RESET, Constants.BOLD, Constants.RESET, Constants.BOLD, Constants.RESET, Constants.BOLD, Constants.RESET, Constants.BOLD, Constants.RESET, Constants.BOLD, Constants.RESET, Constants.BOLD, Constants.RESET);
     }
 
+    // Display search menu usage menu
+    public static void displaySearchMenu() {
+        System.out.printf("%sPlease select a search option:%s\n" +
+                "%sMonth to Date%s    : mtd, month-todate-search\n" +
+                "%sPrevious Month%s   : pms, previous-month-search\n" +
+                "%sYear to Date%s     : ytd, year-todate-search\n" +
+                "%sPrevious Year%s    : pys, previous-year-search\n" +
+                "%sSearch by Vendor%s : vs, vendor-search\n" +
+                "%sCustom Search%s    : cs, custom-search\n" +
+                "%sBack to Menu%s     : b, back\n", Constants.BOLD, Constants.RESET, Constants.BOLD, Constants.RESET, Constants.BOLD, Constants.RESET, Constants.BOLD, Constants.RESET, Constants.BOLD, Constants.RESET, Constants.BOLD, Constants.RESET, Constants.BOLD, Constants.RESET, Constants.BOLD, Constants.RESET);
+    }
+
 
     // Display all transactions
     public static void displayLedger(List<Transaction> transactions){

@@ -21,7 +21,7 @@ public class SwiftTally {
         while (true) {
             Display.displayMenu();
             userInput = scanner.nextLine().toLowerCase();
-            directUser(userInput, transactions, scanner);
+            DirectUser.directUserMainMenu(userInput, transactions, scanner);
         }
     }
 
@@ -31,10 +31,10 @@ public class SwiftTally {
     public static void directUser(String userInput, List<Transaction> transactions, Scanner scanner) {
         switch (userInput) {
             case "c", "post-credit":
-                AddTransaction.postCredit(transactions, scanner);
+                TransactionHandler.postCredit(transactions, scanner);
                 break;
             case "d", "post-debit":
-                AddTransaction.postDebit(transactions, scanner);
+                TransactionHandler.postDebit(transactions, scanner);
                 break;
             case "l", "display-ledger":
                 Display.displayLedger(transactions);
@@ -55,10 +55,5 @@ public class SwiftTally {
             default:
                 System.out.println("Please see below for valid Swift Tally commands:");
         }
-    }
-
-    // Personal Challenge: Create a function to remove an entry
-    public static void deleteTransaction(List<Transaction> transactions, Scanner s){
-
     }
 }

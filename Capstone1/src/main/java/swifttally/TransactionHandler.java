@@ -5,7 +5,12 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Scanner;
 
-public class AddTransaction {
+public class TransactionHandler {
+
+    // Personal Challenge: Create a function to remove an entry
+    public static void deleteTransaction(List<Transaction> transactions, Scanner s){
+
+    }
 
     // Add a credit transaction to transactions.psv
     public static void postCredit(List<Transaction> transactions, Scanner s){
