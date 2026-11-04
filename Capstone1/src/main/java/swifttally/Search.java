@@ -3,7 +3,7 @@ package swifttally;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
-
+// TODO: Organize search results from earliest to most current in output
 public class Search {
     // Search for a transaction
     public static void Search(List<Transaction> transactions, Scanner s) {
@@ -28,7 +28,7 @@ public class Search {
     public static void monthToDate(List<Transaction> transactions) {
         // Get the current local date
         LocalDateTime currentLocalDate = LocalDateTime.now();
-        // Get the current month from currentLocalDate and hold this valud in a String, currentMonth
+        // Get the current month and year from currentLocalDate and hold this valud in a String, currentMonth
         String currentMonth = Constants.LDTFM.format(currentLocalDate);
         String currentYear = Constants.LDTFY.format(currentLocalDate);
 
@@ -46,7 +46,7 @@ public class Search {
         LocalDateTime currentLocalDate = LocalDateTime.now();
         // Make a new date starting on the first day of last month
         LocalDateTime previousMonthLocalDate = LocalDateTime.of(Integer.parseInt(Constants.LDTFY.format(currentLocalDate)), Integer.parseInt(Constants.LDTFM.format(currentLocalDate)) - 1, 1, 1, 1);
-        // Get the previous month from the previousMonthLocalDate
+        // Get the previous month and current year from the previousMonthLocalDate
         String previousMonth = Constants.LDTFM.format(previousMonthLocalDate);
         String currentYear = Constants.LDTFY.format(previousMonthLocalDate);
 
@@ -61,12 +61,32 @@ public class Search {
 
     // Return list of all transactions made this year
     public static void yearToDate(List<Transaction> transactions){
+        // Get the current local date
+        LocalDateTime currentLocalDate = LocalDateTime.now();
+        // Get the current year from currentLocalDate
+        String currentYear = Constants.LDTFY.format(currentLocalDate);
 
+        // For each transaction within transactions if the year matches the current year print the transaction
+        for(Transaction transaction : transactions){
+            if(Constants.LDTFY.format(transaction.getTransactionDate()).equals(currentYear)){
+                transaction.printTransaction();
+            }
+        }
     }
 
     // Return list of all transactions made last year
     public static void previousYear(List<Transaction> transactions){
+        // Get the current local date
+        LocalDateTime currentLocalDate = LocalDateTime.now();
+        // Get the year from currentLocalDate and subtract 1 to get the previous year
+        String priorYear = String.valueOf(Integer.parseInt(Constants.LDTFY.format(currentLocalDate)) - 1);
 
+        // For each transaction within transactions if the year matches the prior year print the transaction
+        for(Transaction transaction : transactions){
+            if(Constants.LDTFY.format(transaction.getTransactionDate()).equals(priorYear)){
+                transaction.printTransaction();
+            }
+        }
     }
 
     // Return list of all transactions made by the vendor the user inputs
