@@ -91,7 +91,29 @@ public class Search {
 
     // Return list of all transactions made by the vendor the user inputs
     public static void searchByVendor(List<Transaction> transactions, Scanner s){
+        boolean resultsEmpty = true;
+        String userInput = "";
 
+        while(true){
+            resultsEmpty = true;
+            userInput = "";
+            System.out.println("Please enter the vendors name you'd like to search for or 'b' to return: ");
+            userInput = s.nextLine().toLowerCase();
+            if(userInput.equals("b") || userInput.equals("back")){
+                break;
+            }
+            System.out.println("Search Results:\n---------------------------------------------------------------------------------------------------------------------");
+            for(Transaction transaction : transactions){
+                if(transaction.getTransactionVendor().toLowerCase().contains(userInput)){
+                    resultsEmpty = false;
+                    transaction.printTransaction();
+                }
+            }
+            if(resultsEmpty) {
+                System.out.println("No transaction with that vendor name found.");
+                System.out.println("---------------------------------------------------------------------------------------------------------------------");
+            }
+        }
     }
 
     // Return list of all transactions made based off of various search parameters entered by the user

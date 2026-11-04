@@ -59,7 +59,6 @@ public class DirectUser {
                 System.out.println("Continue searching?:");
                 break;
             case "vs", "vendor-search":
-                System.out.println("Search Results:\n---------------------------------------------------------------------------------------------------------------------");
                 Search.searchByVendor(transactions, s);
                 System.out.println("Continue searching?:");
                 break;
