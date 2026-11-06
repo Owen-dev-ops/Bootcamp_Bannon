@@ -214,6 +214,7 @@ public class Search {
 
             // searchResults will hold a list of the filtered search
             List<Transaction> searchResults = new ArrayList<>(transactions);
+            // toRemove holds a list of the transactions to remove from searchResults
             List<Transaction> toRemove = new ArrayList<>();
 
             // If user entered a start date filter out all prior transactions up to that date
@@ -266,7 +267,50 @@ public class Search {
 
             // If user entered an end date filter out all transactions post that date
             if(!userInput[1].equals("")){
+                // Add any transactions with dates post the end date year to the toRemove list
+                for(Transaction transaction : searchResults){
+                    if(Integer.parseInt(Constants.LDTFY.format(transaction.getTransactionDate())) > Integer.parseInt(Constants.LDTFY.format((TemporalAccessor) userInput[1]))) {
+                        toRemove.add(transaction);
+                    }
+                }
 
+                // For each transaction in toRemove, remove it from searchResults
+                for(Transaction transaction : toRemove){
+                    searchResults.remove(transaction);
+                }
+
+                // clear toRemove
+                toRemove.clear();
+
+                // Add any transactions with dates post the end month to the toRemove list
+                for(Transaction transaction : searchResults){
+                    if(Integer.parseInt(Constants.LDTFY.format(transaction.getTransactionDate())) == Integer.parseInt(Constants.LDTFY.format((TemporalAccessor) userInput[1])) && Integer.parseInt(Constants.LDTFM.format(transaction.getTransactionDate())) > Integer.parseInt(Constants.LDTFM.format((TemporalAccessor) userInput[1]))) {
+                        toRemove.add(transaction);
+                    }
+                }
+
+                // For each transaction in toRemove, remove it from searchResults
+                for(Transaction transaction : toRemove){
+                    searchResults.remove(transaction);
+                }
+
+                // clear toRemove
+                toRemove.clear();
+
+                // Add any transactions with dates post to the end date day to the toRemove list
+                for(Transaction transaction : searchResults){
+                    if(Integer.parseInt(Constants.LDTFY.format(transaction.getTransactionDate())) == Integer.parseInt(Constants.LDTFY.format((TemporalAccessor) userInput[1])) && Integer.parseInt(Constants.LDTFM.format(transaction.getTransactionDate())) == Integer.parseInt(Constants.LDTFM.format((TemporalAccessor) userInput[1])) && Integer.parseInt(Constants.LDTFD.format(transaction.getTransactionDate())) > Integer.parseInt(Constants.LDTFD.format((TemporalAccessor) userInput[1]))) {
+                        toRemove.add(transaction);
+                    }
+                }
+
+                // For each transaction in toRemove, remove it from searchResults
+                for(Transaction transaction : toRemove){
+                    searchResults.remove(transaction);
+                }
+
+                // clear toRemove
+                toRemove.clear();
             }
 
             // If user entered a description filter out all transactions that don't have that transaction
