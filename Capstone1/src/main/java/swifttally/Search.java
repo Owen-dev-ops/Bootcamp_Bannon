@@ -350,7 +350,19 @@ public class Search {
 
             // If user entered an amount filter out all transactions that don't have that amount
             if(!userInput[4].equals("")){
+                for(Transaction transaction : transactions){
+                    if(transaction.getTransactionAmount() != (Double)userInput[4]){
+                        toRemove.add(transaction);
+                    }
+                }
 
+                // For each transaction in toRemove, remove it from searchResults
+                for(Transaction transaction : toRemove){
+                    searchResults.remove(transaction);
+                }
+
+                // clear toRemove
+                toRemove.clear();
             }
 
             // Print search results
