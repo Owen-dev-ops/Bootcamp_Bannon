@@ -175,7 +175,7 @@ public class Search {
                         break;
                     case 2:
                         System.out.print("Description: ");
-                        userInput[i] = s.nextLine();
+                        userInput[i] = s.nextLine().toLowerCase();
                         if(((String) userInput[i]).equalsIgnoreCase("c")){
                             System.out.println("search canceled, returning you to menu...");
                             return;
@@ -183,7 +183,7 @@ public class Search {
                         break;
                     case 3:
                         System.out.print("Vendor: ");
-                        userInput[i] = s.nextLine();
+                        userInput[i] = s.nextLine().toLowerCase();
                         if(((String) userInput[i]).equalsIgnoreCase("c")){
                             System.out.println("search canceled, returning you to menu...");
                             return;
@@ -216,6 +216,7 @@ public class Search {
             List<Transaction> searchResults = new ArrayList<>(transactions);
             // toRemove holds a list of the transactions to remove from searchResults
             List<Transaction> toRemove = new ArrayList<>();
+
 
             // If user entered a start date filter out all prior transactions up to that date
             if(!userInput[0].equals("")){
@@ -315,7 +316,19 @@ public class Search {
 
             // If user entered a description filter out all transactions that don't have that transaction
             if(!userInput[2].equals("")){
+                for(Transaction transaction : transactions){
+                    if(!transaction.getTransactionDescription().toLowerCase().contains((String)userInput[2])){
+                        toRemove.add(transaction);
+                    }
+                }
 
+                // For each transaction in toRemove, remove it from searchResults
+                for(Transaction transaction : toRemove){
+                    searchResults.remove(transaction);
+                }
+
+                // clear toRemove
+                toRemove.clear();
             }
 
             // If user entered a vendor name filter out all transactions that don't have that vendor name
@@ -330,8 +343,12 @@ public class Search {
 
             // Print search results
             System.out.println("Search Results:\n---------------------------------------------------------------------------------------------------------------------");
-            for(Transaction transaction : searchResults){
-                transaction.printTransaction();
+            if(searchResults.isEmpty()){
+                System.out.println("No search results...");
+            }else{
+                for (Transaction transaction : searchResults) {
+                    transaction.printTransaction();
+                }
             }
             System.out.print("Continue custom search? ");
         }
