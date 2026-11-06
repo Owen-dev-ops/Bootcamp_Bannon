@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class TransactionHandler {
 
-    // Personal Challenge: Create a function to remove an entry
+    // TODO Create a function to remove an entry
     public static void deleteTransaction(List<Transaction> transactions, Scanner s){
 
     }

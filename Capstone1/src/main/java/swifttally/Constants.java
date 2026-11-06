@@ -17,6 +17,8 @@ public class Constants {
     public static final DateTimeFormatter LDTFY = DateTimeFormatter.ofPattern("yyyy");
     // LocalDateTime, only the month format
     public static final DateTimeFormatter LDTFM = DateTimeFormatter.ofPattern("MM");
+    // LocalDateTime, only the day format
+    public static final DateTimeFormatter LDTFD = DateTimeFormatter.ofPattern("dd");
     // LocalTime formatter
     public static final DateTimeFormatter DTF = DateTimeFormatter.ofPattern("HH:mm:ss");
 

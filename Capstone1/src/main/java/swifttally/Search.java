@@ -1,9 +1,17 @@
 package swifttally;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.TemporalAccessor;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
-// TODO: Organize search results from earliest to most current in output
+
+// TODO: Organize search results from earliest to most current in output, put this method in display. Place method after each search operation and ledger display operation
+// transactions.sort();
+
 public class Search {
     // Search for a transaction
     public static void Search(List<Transaction> transactions, Scanner s) {
@@ -28,7 +36,7 @@ public class Search {
     public static void monthToDate(List<Transaction> transactions) {
         // Get the current local date
         LocalDateTime currentLocalDate = LocalDateTime.now();
-        // Get the current month and year from currentLocalDate and hold this valud in a String, currentMonth
+        // Get the current month and year from currentLocalDate and hold this value in a String, currentMonth
         String currentMonth = Constants.LDTFM.format(currentLocalDate);
         String currentYear = Constants.LDTFY.format(currentLocalDate);
 
@@ -118,6 +126,170 @@ public class Search {
 
     // Return list of all transactions made based off of various search parameters entered by the user
     public static void customSearch(List<Transaction> transactions, Scanner s){
+        while(true){
+            // Print proper usage
+            System.out.println("Please enter the values you'd like to filter by or 'c' to return to search menu: ");
 
+            // Get search parameters and verify user input. Within userInput[], index 0 = start date, 1 = end date, 2 = description, 3 = vendor, and 4 = amount
+            Object[] userInput = new Object[5];
+            for(int i = 0; i <= userInput.length; i++) {
+                boolean validAnswer = false;
+                switch (i) {
+                    case 0:
+                        while (!validAnswer) {
+                            System.out.print("Starting Date: ");
+                            try {
+                                userInput[i] = s.nextLine().toLowerCase();
+                                if(userInput[i].equals("c")){
+                                    System.out.println("search canceled, returning you to menu...");
+                                    return;
+                                }
+                                if(userInput[i].equals("")){
+                                    break;
+                                }
+                                userInput[i] = LocalDate.parse((String)userInput[i], Constants.LDTF);
+                                validAnswer = true;
+                            } catch (Exception ex) {
+                                System.out.println("Invalid date, please enter using this format: yyyy-mm-dd. Ex: 2004-07-15");
+                            }
+                        }
+                        break;
+                    case 1:
+                        while (!validAnswer) {
+                            System.out.print("End Date: ");
+                            try {
+                                userInput[i] = s.nextLine().toLowerCase();
+                                if(userInput[i].equals("c")){
+                                    System.out.println("search canceled, returning you to menu...");
+                                    return;
+                                }
+                                if(userInput[i].equals("")){
+                                    break;
+                                }
+                                userInput[i] = LocalDate.parse((String)userInput[i], Constants.LDTF);
+                                validAnswer = true;
+                            } catch (Exception ex) {
+                                System.out.println("Invalid date, please enter using this format: yyyy-mm-dd. Ex: 2004-07-15");
+                            }
+                        }
+                        break;
+                    case 2:
+                        System.out.print("Description: ");
+                        userInput[i] = s.nextLine();
+                        if(((String) userInput[i]).equalsIgnoreCase("c")){
+                            System.out.println("search canceled, returning you to menu...");
+                            return;
+                        }
+                        break;
+                    case 3:
+                        System.out.print("Vendor: ");
+                        userInput[i] = s.nextLine();
+                        if(((String) userInput[i]).equalsIgnoreCase("c")){
+                            System.out.println("search canceled, returning you to menu...");
+                            return;
+                        }
+                        break;
+                    case 4:
+                        System.out.print("Amount: ");
+                        while (!validAnswer) {
+                            try {
+                                userInput[i] = s.nextLine().toLowerCase();
+                                if(userInput[i].equals("c")){
+                                    System.out.println("search canceled, returning you to menu...");
+                                    return;
+                                }
+                                if(userInput[i].equals("")){
+                                    break;
+                                }
+                                userInput[i] = Double.parseDouble((String)userInput[i]);
+                                validAnswer = true;
+                            } catch (Exception ex) {
+                                System.out.println("Invalid amount, please enter a valid dollar amount using this format: $$.cc. Ex: 50.32, 1032.06");
+                            }
+                        }
+                        break;
+                    default:
+                }
+            }
+
+            // searchResults will hold a list of the filtered search
+            List<Transaction> searchResults = new ArrayList<>(transactions);
+            List<Transaction> toRemove = new ArrayList<>();
+
+            // If user entered a start date filter out all prior transactions up to that date
+            if(!userInput[0].equals("")){
+                // Add any dates prior to the starting date year to the toRemove list
+                for(Transaction transaction : searchResults){
+                    if(Integer.parseInt(Constants.LDTFY.format(transaction.getTransactionDate())) < Integer.parseInt(Constants.LDTFY.format((TemporalAccessor) userInput[0]))) {
+                        toRemove.add(transaction);
+                    }
+                }
+
+                // For each transaction in toRemove, remove it from searchResults
+                for(Transaction transaction : toRemove){
+                    searchResults.remove(transaction);
+                }
+
+                // clear toRemove
+                toRemove.clear();
+
+                // Add any dates prior the starting month to the toRemove list
+                for(Transaction transaction : searchResults){
+                    if(Integer.parseInt(Constants.LDTFY.format(transaction.getTransactionDate())) == Integer.parseInt(Constants.LDTFY.format((TemporalAccessor) userInput[0])) && Integer.parseInt(Constants.LDTFM.format(transaction.getTransactionDate())) < Integer.parseInt(Constants.LDTFM.format((TemporalAccessor) userInput[0]))) {
+                        toRemove.add(transaction);
+                    }
+                }
+
+                // For each transaction in toRemove, remove it from searchResults
+                for(Transaction transaction : toRemove){
+                    searchResults.remove(transaction);
+                }
+
+                // clear toRemove
+                toRemove.clear();
+
+                // Add any dates prior to the starting day to the toRemove list
+                for(Transaction transaction : searchResults){
+                    if(Integer.parseInt(Constants.LDTFY.format(transaction.getTransactionDate())) == Integer.parseInt(Constants.LDTFY.format((TemporalAccessor) userInput[0])) && Integer.parseInt(Constants.LDTFM.format(transaction.getTransactionDate())) == Integer.parseInt(Constants.LDTFM.format((TemporalAccessor) userInput[0])) && Integer.parseInt(Constants.LDTFD.format(transaction.getTransactionDate())) < Integer.parseInt(Constants.LDTFD.format((TemporalAccessor) userInput[0]))) {
+                        toRemove.add(transaction);
+                    }
+                }
+
+                // For each transaction in toRemove, remove it from searchResults
+                for(Transaction transaction : toRemove){
+                    searchResults.remove(transaction);
+                }
+
+                // clear toRemove
+                toRemove.clear();
+            }
+
+            // If user entered an end date filter out all transactions post that date
+            if(!userInput[1].equals("")){
+
+            }
+
+            // If user entered a description filter out all transactions that don't have that transaction
+            if(!userInput[2].equals("")){
+
+            }
+
+            // If user entered a vendor name filter out all transactions that don't have that vendor name
+            if(!userInput[3].equals("")){
+
+            }
+
+            // If user entered an amount filter out all transactions that don't have that amount
+            if(!userInput[4].equals("")){
+
+            }
+
+            // Print search results
+            System.out.println("Search Results:\n---------------------------------------------------------------------------------------------------------------------");
+            for(Transaction transaction : searchResults){
+                transaction.printTransaction();
+            }
+            System.out.print("Continue custom search? ");
+        }
     }
 }

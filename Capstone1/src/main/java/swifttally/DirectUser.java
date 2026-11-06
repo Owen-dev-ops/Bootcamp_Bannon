@@ -63,7 +63,6 @@ public class DirectUser {
                 System.out.println("Continue searching?:");
                 break;
             case "cs", "custom-search":
-                System.out.println("Search Results:\n---------------------------------------------------------------------------------------------------------------------");
                 Search.customSearch(transactions, s);
                 System.out.println("Continue searching?:");
                 break;

@@ -3,20 +3,9 @@ date|time|description|vendor|transactionAmount
 2023-04-15|11:15:00|Invoice 1001 paid|Joe|1500.00
 2026-04-04|10:00|Credit Test|Owen|50.00
 2020-06-12|09:15:15|Debit test|Owen|-60.00
-2026-10-04|10:00|NEW NEW CREDIT TEST|Owen|10.00
-2026-04-04|10:00|Another credit test|Cabellas|25.00
-2026-04-04|10:00|another debit test|Bentley|-2050.69
-2025-12-04|10:00|Anytthing|anything|-20.00
-2026-05-01|10:15:15|Test|Test|50.00
-2024-08-04|09:15:05|test|test|-50.00
-2025-05-06|11:11:11|Test|Test|50.32
-1000-12-04|13:01:59|Test|test|-50.32
-2026-11-04|10:00|month to date test|month to date inc|20.00
-2026-11-02|09:15:04|Month to date test|month to date test inc|-25.25
-2026-10-01|10:00|previous month search test|previous month search test inc|25.98
-2024-10-02|10:00|test|test|-20.00
-2024-11-04|19:04:02|test|test|25.00
-2024-10-10|10:00|test|test|20.00
-2025-04-30|11:10:04|test|test|-25.00
-2026-10-10|10:00|test|Walmart|-25.00
-2026-10-10|10:10:10|test|Walmart|25.00
+2027-01-01|00:00|test|test|10.00
+2027-06-01|00:00|test|test|10.00
+2027-12-01|00:00|test|test|10.00
+2027-01-15|00:00|test|test|10.00
+2027-01-15|00:00|test|test|10.00
+2027-01-30|00:00|test|test|10.00
