@@ -23,6 +23,7 @@ public class Display {
 
     }
 
+
     // Display search menu usage menu
     public static void displaySearchMenu() {
         System.out.println(".--------------------------------------------------------.\n" +
@@ -77,5 +78,4 @@ public class Display {
         }
         System.out.printf("%sWhat would you like to do next? (Enter h or help for options menu)%s\n", Constants.YELLOW, Constants.RESET);
     }
-
 }
