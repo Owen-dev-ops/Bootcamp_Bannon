@@ -333,7 +333,19 @@ public class Search {
 
             // If user entered a vendor name filter out all transactions that don't have that vendor name
             if(!userInput[3].equals("")){
+                for(Transaction transaction : transactions){
+                    if(!transaction.getTransactionVendor().toLowerCase().contains((String)userInput[3])){
+                        toRemove.add(transaction);
+                    }
+                }
 
+                // For each transaction in toRemove, remove it from searchResults
+                for(Transaction transaction : toRemove){
+                    searchResults.remove(transaction);
+                }
+
+                // clear toRemove
+                toRemove.clear();
             }
 
             // If user entered an amount filter out all transactions that don't have that amount
