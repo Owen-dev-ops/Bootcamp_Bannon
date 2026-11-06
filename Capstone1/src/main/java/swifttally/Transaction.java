@@ -69,22 +69,11 @@ public class Transaction {
 
     // Behaviors
     public void printTransaction(){
-        System.out.printf("%sDate%s: %s  " +
-                "%sTime%s: %s   " +
-                "%sDescription%s: %s   " +
-                "%sVendor%s: %s   " +
-                "%sAmount%s: %.2f\n" +
-                "---------------------------------------------------------------------------------------------------------------------\n", Constants.BOLD, Constants.RESET, this.transactionDate, Constants.BOLD, Constants.RESET, this.transactionTime, Constants.BOLD, Constants.RESET, this.transactionDescription, Constants.BOLD, Constants.RESET, this.transactionVendor, Constants.BOLD, Constants.RESET, this.transactionAmount);
-    }
-
-    @Override
-    public String toString() {
-        return "transaction{" +
-                "transactionDate=" + transactionDate +
-                ", transactionTime=" + transactionTime +
-                ", transactionDescription='" + transactionDescription + '\'' +
-                ", vendor='" + transactionVendor + '\'' +
-                ", transactionAmount=" + transactionAmount +
-                '}';
+        System.out.printf("%s%sDate%s: %-15s" +
+                "%s%sTime%s: %-15s" +
+                "%s%sDescription%s: %-30s" +
+                "%s%sVendor%s: %-30s" +
+                "%s%sAmount%s: %-20.2f\n" +
+                "------------------------------------------------------------------------------------------------------------------------------------------------------\n", Constants.BOLD, Constants.BLUE, Constants.RESET, this.transactionDate, Constants.BOLD, Constants.BLUE, Constants.RESET, this.transactionTime, Constants.BOLD, Constants.BLUE, Constants.RESET, this.transactionDescription, Constants.BOLD, Constants.BLUE, Constants.RESET, this.transactionVendor, Constants.BOLD, Constants.BLUE, Constants.RESET, this.transactionAmount);
     }
 }

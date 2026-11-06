@@ -9,9 +9,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
-// TODO: Organize search results from earliest to most current in output, put this method in display. Place method after each search operation and ledger display operation
-// transactions.sort();
-
 public class Search {
     // Search for a transaction
     public static void Search(List<Transaction> transactions, Scanner s) {
@@ -39,12 +36,17 @@ public class Search {
         // Get the current month and year from currentLocalDate and hold this value in a String, currentMonth
         String currentMonth = Constants.LDTFM.format(currentLocalDate);
         String currentYear = Constants.LDTFY.format(currentLocalDate);
+        boolean isEmpty = true;
 
         // For each transaction within transactions if the year matches the current year and the month matches the current month, print it to the user
         for(Transaction transaction : transactions){
             if(Constants.LDTFM.format(transaction.getTransactionDate()).equals(currentMonth) && Constants.LDTFY.format(transaction.getTransactionDate()).equals(currentYear)){
+                isEmpty = false;
                 transaction.printTransaction();
             }
+        }
+        if(isEmpty){
+            System.out.println("No search results...");
         }
     }
 
@@ -57,14 +59,18 @@ public class Search {
         // Get the previous month and current year from the previousMonthLocalDate
         String previousMonth = Constants.LDTFM.format(previousMonthLocalDate);
         String currentYear = Constants.LDTFY.format(previousMonthLocalDate);
+        boolean isEmpty = true;
 
         // For each transaction within transactions if year matches the current year and the month matches the previous month, print it to the user
         for(Transaction transaction : transactions){
             if(Constants.LDTFM.format(transaction.getTransactionDate()).equals(previousMonth) && Constants.LDTFY.format(transaction.getTransactionDate()).equals(currentYear)){
+                isEmpty = false;
                 transaction.printTransaction();
             }
         }
-
+        if(isEmpty){
+            System.out.println("No search results...");
+        }
     }
 
     // Return list of all transactions made this year
@@ -73,12 +79,17 @@ public class Search {
         LocalDateTime currentLocalDate = LocalDateTime.now();
         // Get the current year from currentLocalDate
         String currentYear = Constants.LDTFY.format(currentLocalDate);
+        boolean isEmpty = true;
 
         // For each transaction within transactions if the year matches the current year print the transaction
         for(Transaction transaction : transactions){
             if(Constants.LDTFY.format(transaction.getTransactionDate()).equals(currentYear)){
+                isEmpty = false;
                 transaction.printTransaction();
             }
+        }
+        if(isEmpty){
+            System.out.println("No search results...");
         }
     }
 
@@ -88,12 +99,17 @@ public class Search {
         LocalDateTime currentLocalDate = LocalDateTime.now();
         // Get the year from currentLocalDate and subtract 1 to get the previous year
         String priorYear = String.valueOf(Integer.parseInt(Constants.LDTFY.format(currentLocalDate)) - 1);
+        boolean isEmpty = true;
 
         // For each transaction within transactions if the year matches the prior year print the transaction
         for(Transaction transaction : transactions){
             if(Constants.LDTFY.format(transaction.getTransactionDate()).equals(priorYear)){
+                isEmpty = false;
                 transaction.printTransaction();
             }
+        }
+        if(isEmpty){
+            System.out.println("No search results...");
         }
     }
 
@@ -110,7 +126,7 @@ public class Search {
             if(userInput.equals("b") || userInput.equals("back")){
                 break;
             }
-            System.out.println("Search Results:\n---------------------------------------------------------------------------------------------------------------------");
+            System.out.println("Search Results:\n------------------------------------------------------------------------------------------------------------------------------------------------------");
             for(Transaction transaction : transactions){
                 if(transaction.getTransactionVendor().toLowerCase().contains(userInput)){
                     resultsEmpty = false;
@@ -119,7 +135,7 @@ public class Search {
             }
             if(resultsEmpty) {
                 System.out.println("No transaction with that vendor name found.");
-                System.out.println("---------------------------------------------------------------------------------------------------------------------");
+                System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");
             }
         }
     }
@@ -137,11 +153,11 @@ public class Search {
                 switch (i) {
                     case 0:
                         while (!validAnswer) {
-                            System.out.print("Starting Date: ");
+                            System.out.printf("%sStarting Date:%s \n", Constants.BOLD, Constants.RESET);
                             try {
                                 userInput[i] = s.nextLine().toLowerCase();
                                 if(userInput[i].equals("c")){
-                                    System.out.println("search canceled, returning you to menu...");
+                                    System.out.printf("%ssearch canceled, returning you to menu...%s\n", Constants.GREEN, Constants.RESET);
                                     return;
                                 }
                                 if(userInput[i].equals("")){
@@ -150,17 +166,17 @@ public class Search {
                                 userInput[i] = LocalDate.parse((String)userInput[i], Constants.LDTF);
                                 validAnswer = true;
                             } catch (Exception ex) {
-                                System.out.println("Invalid date, please enter using this format: yyyy-mm-dd. Ex: 2004-07-15");
+                                System.out.printf("%sInvalid date, please enter using this format: yyyy-mm-dd. Ex: 2004-07-15%s\n", Constants.RED, Constants.RESET);
                             }
                         }
                         break;
                     case 1:
                         while (!validAnswer) {
-                            System.out.print("End Date: ");
+                            System.out.printf("%sEnd Date:%s \n", Constants.BOLD, Constants.RESET);
                             try {
                                 userInput[i] = s.nextLine().toLowerCase();
                                 if(userInput[i].equals("c")){
-                                    System.out.println("search canceled, returning you to menu...");
+                                    System.out.printf("%ssearch canceled, returning you to menu...%s\n", Constants.GREEN, Constants.RESET);
                                     return;
                                 }
                                 if(userInput[i].equals("")){
@@ -169,33 +185,33 @@ public class Search {
                                 userInput[i] = LocalDate.parse((String)userInput[i], Constants.LDTF);
                                 validAnswer = true;
                             } catch (Exception ex) {
-                                System.out.println("Invalid date, please enter using this format: yyyy-mm-dd. Ex: 2004-07-15");
+                                System.out.printf("%sInvalid date, please enter using this format: yyyy-mm-dd. Ex: 2004-07-15%s\n", Constants.RED, Constants.RESET);
                             }
                         }
                         break;
                     case 2:
-                        System.out.print("Description: ");
+                        System.out.printf("%sDescription:%s \n", Constants.BOLD, Constants.RESET);
                         userInput[i] = s.nextLine().toLowerCase();
                         if(((String) userInput[i]).equalsIgnoreCase("c")){
-                            System.out.println("search canceled, returning you to menu...");
+                            System.out.printf("%ssearch canceled, returning you to menu...%s\n", Constants.GREEN, Constants.RESET);
                             return;
                         }
                         break;
                     case 3:
-                        System.out.print("Vendor: ");
+                        System.out.printf("%sVendor:%s \n", Constants.BOLD, Constants.RESET);
                         userInput[i] = s.nextLine().toLowerCase();
                         if(((String) userInput[i]).equalsIgnoreCase("c")){
-                            System.out.println("search canceled, returning you to menu...");
+                            System.out.printf("%ssearch canceled, returning you to menu...%s\n", Constants.GREEN, Constants.RESET);
                             return;
                         }
                         break;
                     case 4:
-                        System.out.print("Amount: ");
+                        System.out.printf("%sAmount:%s \n", Constants.BOLD, Constants.RESET);
                         while (!validAnswer) {
                             try {
                                 userInput[i] = s.nextLine().toLowerCase();
                                 if(userInput[i].equals("c")){
-                                    System.out.println("search canceled, returning you to menu...");
+                                    System.out.printf("%ssearch canceled, returning you to menu...%s\n", Constants.GREEN, Constants.RESET);
                                     return;
                                 }
                                 if(userInput[i].equals("")){
@@ -204,7 +220,7 @@ public class Search {
                                 userInput[i] = Double.parseDouble((String)userInput[i]);
                                 validAnswer = true;
                             } catch (Exception ex) {
-                                System.out.println("Invalid amount, please enter a valid dollar amount using this format: $$.cc. Ex: 50.32, 1032.06");
+                                System.out.printf("%sInvalid amount, please enter a valid dollar amount using this format: $$.cc. Ex: 50.32, 1032.06%s\n", Constants.RED, Constants.RESET);
                             }
                         }
                         break;
@@ -366,7 +382,7 @@ public class Search {
             }
 
             // Print search results
-            System.out.println("Search Results:\n---------------------------------------------------------------------------------------------------------------------");
+            System.out.println("Search Results:\n------------------------------------------------------------------------------------------------------------------------------------------------------");
             if(searchResults.isEmpty()){
                 System.out.println("No search results...");
             }else{

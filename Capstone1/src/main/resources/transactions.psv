@@ -1,11 +1,51 @@
 date|time|description|vendor|transactionAmount
-2023-04-15|10:13:25|ergonomic keyboard|Amazon|-89.50
-2023-04-15|11:15:00|Invoice 1001 paid|Joe|1500.00
-2026-04-04|10:00|Credit Test|Owen|50.00
-2020-06-12|09:15:15|Debit test|Owen|-60.00
-2027-01-01|00:00|test|test|10.00
-2027-06-01|00:00|test|test|10.00
-2027-12-01|00:00|test|test|10.00
-2027-01-15|00:00|test|test|10.00
-2027-01-15|00:00|test|test|10.00
-2027-01-30|00:00|test|test|10.00
+2019-04-15|10:13:25|ergonomic keyboard|Amazon|-89.50
+2019-04-15|11:15:00|Invoice 1001 paid|Joe|1500.00
+2019-11-16|09:02:41|monthly coffee subscription|Blue Bottle|-24.00
+2020-01-16|13:47:10|Invoice 1002 paid|Maria Santos|2250.00
+2020-02-17|08:30:15|office printer paper|Staples|-42.75
+2020-03-17|14:22:03|monthly internet service|Comcast|-79.99
+2020-05-18|10:05:50|Invoice 1003 paid|Chen Consulting|3200.00
+2020-06-18|12:41:19|team lunch|Panera Bread|-86.40
+2020-08-19|09:18:33|standing desk mat|Amazon|-34.99
+2020-09-19|15:00:00|Invoice 1004 paid|Joe|1800.00
+2020-12-20|11:09:27|web hosting renewal|GoDaddy|-119.88
+2021-01-20|16:34:52|Invoice 1005 paid|Riverside Dental|950.00
+2021-02-21|08:55:08|gas for company vehicle|Shell|-58.20
+2021-03-21|13:12:44|USB-C hub|Best Buy|-64.99
+2021-04-22|10:27:16|Invoice 1006 paid|Maria Santos|2750.00
+2021-06-22|14:50:39|cloud storage subscription|Google|-9.99
+2021-07-23|09:44:01|business liability insurance|Hiscox|-215.00
+2021-09-23|12:08:22|Invoice 1007 paid|Northwind Traders|4100.00
+2021-10-24|10:15:36|software license|Adobe|-54.99
+2021-12-24|15:29:47|client dinner|Olive Garden|-132.60
+2022-01-25|09:03:12|Invoice 1008 paid|Chen Consulting|2900.00
+2022-02-25|11:36:58|desk lamp|IKEA|-45.00
+2022-03-26|13:20:05|phone bill|Verizon|-85.00
+2022-04-26|16:11:29|Invoice 1009 paid|Joe|1200.00
+2022-06-27|08:47:40|parking fees|ParkMobile|-18.50
+2022-07-27|10:58:14|Invoice 1010 paid|Riverside Dental|1650.00
+2022-08-28|12:33:21|noise-cancelling headphones|Best Buy|-199.99
+2022-09-28|14:05:55|accounting software|QuickBooks|-35.00
+2022-10-29|09:22:09|Invoice 1011 paid|Northwind Traders|3750.00
+2022-12-29|11:40:33|ink cartridges|Office Depot|-76.30
+2023-01-30|10:10:10|co-working space rent|WeWork|-350.00
+2023-03-01|08:12:47|electric bill|Duke Energy|-142.67
+2023-04-01|13:59:26|Invoice 1013 paid|Chen Consulting|3500.00
+2023-05-02|09:35:51|webcam|Logitech|-79.95
+2023-06-02|12:17:03|Invoice 1014 paid|Joe|1350.00
+2023-07-03|10:48:29|business cards|Vistaprint|-39.99
+2023-08-03|14:26:44|Invoice 1015 paid|Northwind Traders|5000.00
+2023-09-04|11:03:15|project management tool|Asana|-24.99
+2023-10-04|16:52:37|Invoice 1016 paid|Riverside Dental|1100.00
+2023-11-05|08:39:20|train ticket to client site|Amtrak|-67.00
+2024-01-05|10:21:58|team lunch|Chipotle|-54.25
+2024-02-06|13:14:06|Invoice 1017 paid|Maria Santos|2600.00
+2024-03-06|15:33:42|conference registration|Eventbrite|-295.00
+2024-04-07|09:56:31|Invoice 1018 paid|Chen Consulting|3050.00
+2024-06-07|12:44:18|monitor stand|Amazon|-52.49
+2024-07-08|10:07:23|monthly coffee subscription|Blue Bottle|-24.00
+2024-09-08|14:38:09|Invoice 1019 paid|Joe|1950.00
+2025-10-07|15:38:52|Invoice 1020 paid|Joe|2000.00
+2026-10-01|16:32:32|Invoice 1021 paid|Joe|2050.00
+2026-11-15|04:50:04|Gas|Exxon|74.98

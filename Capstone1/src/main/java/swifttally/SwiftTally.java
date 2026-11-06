@@ -15,7 +15,7 @@ public class SwiftTally {
         String userInput = "";
 
         // Display Swift Tally usage menu
-        System.out.printf("%sWelcome to Swift Tally%s\n", Constants.BOLD, Constants.RESET);
+        System.out.printf("%s%s%sWelcome to Swift Tally%s\n", Constants.BOLD, Constants.UNDERLINE, Constants.GREEN, Constants.RESET);
 
         // While the user hasn't chosen to exit the program, direct them to the correct method based off their input
         while (true) {

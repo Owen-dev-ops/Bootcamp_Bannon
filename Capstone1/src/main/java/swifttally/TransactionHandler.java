@@ -34,76 +34,76 @@ public class TransactionHandler {
             switch (i) {
                 case 0:
                     while (!validAnswer) {
-                        System.out.print("Date: ");
+                        System.out.printf("%sDate:%s ", Constants.BOLD, Constants.RESET);
                         try {
                             userInput[i] = s.nextLine().toLowerCase();
                             if(userInput[i].equals("c")){
-                                System.out.println("transaction canceled, returning you to menu...");
+                                System.out.printf("%stransaction canceled, returning you to menu...%s\n", Constants.GREEN, Constants.RESET);
                                 return;
                             }
                             userInput[i] = LocalDate.parse((String)userInput[i], Constants.LDTF);
                             validAnswer = true;
                         } catch (Exception ex) {
-                            System.out.println("Invalid date, please enter using this format: yyyy-mm-dd. Ex: 2004-07-15");
+                            System.out.printf("%sInvalid date, please enter using this format: yyyy-mm-dd. Ex: 2004-07-15%s\n", Constants.RED, Constants.RESET);
                         }
                     }
                     break;
                 case 1:
                     while (!validAnswer) {
-                        System.out.print("Time: ");
+                        System.out.printf("%sTime:%s ", Constants.BOLD, Constants.RESET);
                         try {
                             userInput[i] = s.nextLine().toLowerCase();
                             if(userInput[i].equals("c")){
-                                System.out.println("transaction canceled, returning you to menu...");
+                                System.out.printf("%stransaction canceled, returning you to menu...%s\n", Constants.GREEN, Constants.RESET);
                                 return;
                             }
                             userInput[i] = LocalTime.parse((String)userInput[i], Constants.DTF);
                             validAnswer = true;
                         } catch (Exception ex) {
-                            System.out.println("Invalid time, please enter using this format: HH:mm:ss. Ex: 10:13:25");
+                            System.out.printf("%sInvalid time, please enter using this format: HH:mm:ss. Ex: 10:13:25%s\n", Constants.RED, Constants.RESET);
                         }
                     }
                     break;
                 case 2:
-                    System.out.print("Description: ");
+                    System.out.printf("%sDescription:%s ", Constants.BOLD, Constants.RESET);
                     userInput[i] = s.nextLine();
                     if(((String) userInput[i]).equalsIgnoreCase("c")){
-                        System.out.println("transaction canceled, returning you to menu...");
+                        System.out.printf("%stransaction canceled, returning you to menu...%s\n", Constants.GREEN, Constants.RESET);
                         return;
                     }
                     break;
                 case 3:
-                    System.out.print("Vendor: ");
+                    System.out.printf("%sVendor:%s ", Constants.BOLD, Constants.RESET);
                     userInput[i] = s.nextLine();
                     if(((String) userInput[i]).equalsIgnoreCase("c")){
-                        System.out.println("transaction canceled, returning you to menu...");
+                        System.out.printf("%stransaction canceled, returning you to menu...%s\n", Constants.GREEN, Constants.RESET);
                         return;
                     }
                     break;
                 case 4:
-                    System.out.print("Amount: ");
+                    System.out.printf("%sAmount:%s ", Constants.BOLD, Constants.RESET);
                     while (!validAnswer) {
                         try {
                             userInput[i] = s.nextLine().toLowerCase();
                             if(userInput[i].equals("c")){
-                                System.out.println("transaction canceled, returning you to menu...");
+                                System.out.printf("%stransaction canceled, returning you to menu...%s\n", Constants.GREEN, Constants.RESET);
                                 return;
                             }
                             userInput[i] = Double.parseDouble((String)userInput[i]);
                             if (creditOrDebit == 0) {
                                 if ((double) userInput[i] < 0) {
-                                    System.out.println("Amount for credit transactions must be a positive value: ");
+                                    System.out.printf("%sAmount for credit transactions must be a positive value:%s \n", Constants.RED, Constants.RESET);
                                     throw new RuntimeException();
                                 }
                             } else if (creditOrDebit == 1) {
                                 if ((double) userInput[i] > 0) {
-                                    System.out.println("Amount for debit transactions must be a negative value: ");
+                                    System.out.printf("%sAmount for debit transactions must be a negative value:%s \n", Constants.RED, Constants.RESET);
                                     throw new RuntimeException();
                                 }
                             }
                             validAnswer = true;
                         } catch (Exception ex) {
-                            System.out.println("Invalid amount, please enter a valid dollar amount using this format: $$.cc. Ex: 50.32, 1032.06");
+                            System.out.printf("%sInvalid amount, please enter a valid dollar amount using this format: $$.cc. Ex: 50.32, 1032.06%s\n", Constants.RED, Constants.RESET);
                         }
                     }
                     break;
@@ -117,9 +117,9 @@ public class TransactionHandler {
         FileManager.writeToFile(newTransaction);
 
         if(creditOrDebit == 0){
-            System.out.println("Credit transaction added successfully, returning you to menu...");
+            System.out.printf("%sCredit transaction added successfully, returning you to menu...%s\n", Constants.GREEN, Constants.RESET);
         }else if(creditOrDebit == 1){
-            System.out.println("Debit transaction added successfully, returning you to menu...");
+            System.out.printf("%sDebit transaction added successfully, returning you to menu...%s\n", Constants.GREEN, Constants.RESET);
         }
     }
 }

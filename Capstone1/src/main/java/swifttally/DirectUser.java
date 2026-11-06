@@ -39,22 +39,22 @@ public class DirectUser {
     public static boolean directUserSearchMenu(String userInput, List<Transaction> transactions, Scanner s, boolean validAnswer) {
         switch (userInput) {
             case "mtd", "month-todate-search":
-                System.out.println("Search Results:\n---------------------------------------------------------------------------------------------------------------------");
+                System.out.println("Search Results:\n------------------------------------------------------------------------------------------------------------------------------------------------------");
                 Search.monthToDate(transactions);
                 System.out.println("Continue searching?:");
                 break;
             case "pms", "previous-month-search":
-                System.out.println("Search Results:\n---------------------------------------------------------------------------------------------------------------------");
+                System.out.println("Search Results:\n------------------------------------------------------------------------------------------------------------------------------------------------------");
                 Search.previousMonth(transactions);
                 System.out.println("Continue searching?:");
                 break;
             case "ytd", "year-todate-search":
-                System.out.println("Search Results:\n---------------------------------------------------------------------------------------------------------------------");
+                System.out.println("Search Results:\n------------------------------------------------------------------------------------------------------------------------------------------------------");
                 Search.yearToDate(transactions);
                 System.out.println("Continue searching?:");
                 break;
             case "pys", "previous-year-search":
-                System.out.println("Search Results:\n---------------------------------------------------------------------------------------------------------------------");
+                System.out.println("Search Results:\n------------------------------------------------------------------------------------------------------------------------------------------------------");
                 Search.previousYear(transactions);
                 System.out.println("Continue searching?:");
                 break;
