@@ -8,7 +8,7 @@ date|time|description|vendor|transactionAmount
 2020-05-18|10:05:50|Invoice 1003 paid|Chen Consulting|3200.00
 2020-06-18|12:41:19|team lunch|Panera Bread|-86.40
 2020-08-19|09:18:33|standing desk mat|Amazon|-34.99
-2020-09-19|15:00:00|Invoice 1004 paid|Joe|1800.00
+2020-09-19|15:00:00|Invoice 1004 paid|Marvin|1800.00
 2020-12-20|11:09:27|web hosting renewal|GoDaddy|-119.88
 2021-01-20|16:34:52|Invoice 1005 paid|Riverside Dental|950.00
 2021-02-21|08:55:08|gas for company vehicle|Shell|-58.20
@@ -46,6 +46,10 @@ date|time|description|vendor|transactionAmount
 2024-06-07|12:44:18|monitor stand|Amazon|-52.49
 2024-07-08|10:07:23|monthly coffee subscription|Blue Bottle|-24.00
 2024-09-08|14:38:09|Invoice 1019 paid|Joe|1950.00
-2025-10-07|15:38:52|Invoice 1020 paid|Joe|2000.00
-2026-10-01|16:32:32|Invoice 1021 paid|Joe|2050.00
+2025-04-02|23:11:02|Invoice 1020 paid|Marvin|2500.25
+2025-10-07|15:38:52|Invoice 1021 paid|Joe|2000.00
+2026-10-01|16:32:32|Invoice 1022 paid|Joe|2050.00
 2026-10-15|09:15:04|sold tv|Dave|200.00
+2026-11-02|08:02:54|Invoice 1023 paid|Marvin|1500.25
+2025-08-01|09:15:02|sold sofa|Ethan|100.00
+2026-02-08|19:00|Gas|Exxon|-65.82
