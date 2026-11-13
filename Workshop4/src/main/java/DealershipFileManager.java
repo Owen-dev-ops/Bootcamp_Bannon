@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DealershipFileManager {
-    public static List<Vehicle> readFile() {
+    public static List<Vehicle> readInventory() {
         List<Vehicle> inventory = new ArrayList<>();
         try {
             // inventory holds the list of games we read from the videogame_product_inventory psv file
@@ -40,7 +40,7 @@ public class DealershipFileManager {
         return inventory;
     }
 
-    public static void writeToFile(Vehicle vehicle){
+    public static void writeToInventory(Vehicle vehicle){
         try{
             FileWriter fileWriter = new FileWriter("src/main/resources/inventory.psv", true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -69,6 +69,38 @@ public class DealershipFileManager {
         }catch(Exception ex){
             System.out.println("Error handling file to write to");
             ex.printStackTrace();
+        }
+    }
+
+    public static Dealership getDealership(){
+        Dealership dealership = new Dealership("", "", "");
+        try {
+            FileReader fileReader = new FileReader("src/main/resources/inventory.psv");
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String row;
+
+            row = bufferedReader.readLine();
+            String[] brokenUpRow = row.split("\\|");
+            String name = brokenUpRow[0];
+            String address = brokenUpRow[1];
+            String phone = brokenUpRow[2];
+
+            bufferedReader.close();
+            fileReader.close();
+            return new Dealership(name, address, phone);
+        } catch (IOException ex) {
+            System.out.println("Error opening file to read");
+            ex.printStackTrace();
+        } catch (Exception ex) {
+            System.out.println("Error handling file to read");
+            ex.printStackTrace();
+        }
+        return dealership;
+    }
+
+    public static void saveDealership(Dealership dealership){
+        for(Vehicle vehicle : dealership.getInventory()){
+            writeToInventory(vehicle);
         }
     }
 }
