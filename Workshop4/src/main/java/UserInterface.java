@@ -1,5 +1,6 @@
 import java.math.BigDecimal;
 import java.util.List;
+import JavaHelpers.ColorCodes;
 
 public class UserInterface {
     private Dealership dealership;
@@ -20,14 +21,25 @@ public class UserInterface {
         DealershipFileManager.writeToInventory(test);
          */
 
-        UserInterface dealership = new UserInterface(DealershipFileManager.getDealership());
-        dealership.display();
+        UserInterface ui = new UserInterface(DealershipFileManager.getDealership());
+        ui.display();
     }
-    // methods
+
     public void display() {
-        System.out.println("Welcome to LotFinder");
+        System.out.printf("%sWelcome to LotFinder%s\n------------------------------------------\n", ColorCodes.GREEN_BACKGROUND, ColorCodes.RESET);
 
         // Print Usage menu
+        System.out.printf("%s%s%sLotFinder:%s\n" +
+                "%s1:%s Find Vehicles within a price range\n" +
+                "%s2:%s Find vehicles by makes / model\n" +
+                "%s3:%s Find vehicles by year range\n" +
+                "%s4:%s Find vehicles by color\n" +
+                "%s5:%s Find vehicles by mileage range\n" +
+                "%s6:%s Find vehicles by type (car, truck, SUV, van)\n" +
+                "%s7:%s List ALL vehicles\n" +
+                "%s8:%s Add a vehicle\n" +
+                "%s9:%s Remove a vehicle\n" +
+                "%s99:%s Quit", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.GREEN, ColorCodes.RESET, ColorCodes.YELLOW, ColorCodes.RESET, ColorCodes.YELLOW, ColorCodes.RESET, ColorCodes.YELLOW, ColorCodes.RESET, ColorCodes.YELLOW, ColorCodes.RESET,ColorCodes.YELLOW, ColorCodes.RESET,ColorCodes.YELLOW, ColorCodes.RESET,ColorCodes.YELLOW, ColorCodes.RESET,ColorCodes.YELLOW, ColorCodes.RESET,ColorCodes.YELLOW, ColorCodes.RESET, ColorCodes.YELLOW, ColorCodes.RESET);
 
         // get user input
 

@@ -14,6 +14,7 @@ public class Dealership {
         this.phone = phone;
     }
 
+    /*
     public String getPhone() {
         return phone;
     }
@@ -68,5 +69,5 @@ public class Dealership {
 
     public void removeVehicle(Vehicle){
 
-    }
+    } */
 }
