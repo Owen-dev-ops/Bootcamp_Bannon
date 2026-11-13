@@ -1,6 +1,20 @@
+import java.math.BigDecimal;
+import java.util.List;
+
 public class UserInterface {
     public static void run(){
         // Print welcome message
+        System.out.println("Welcome to LotFinder");
+
+        // Test file manager read and write functions
+        /*
+        List<Vehicle> vehicles = DealershipFileManager.readFile();
+        for(Vehicle vehicle : vehicles){
+            vehicle.printVehicleInfo();
+        }
+        Vehicle test = new Vehicle(44506, 2000, "honda", "civic", "car", "blue", 25025, BigDecimal.valueOf(10000));
+        DealershipFileManager.writeToFile(test);
+         */
 
         // Print Usage menu
 
@@ -10,7 +24,7 @@ public class UserInterface {
 
     }
 }
-
+/*
 // variables
 private Dealership dealership;
 
@@ -64,3 +78,4 @@ public void processAddVehicleRequest(){
 public void processRemoveVehicleRequest(){
 
 }
+*/
