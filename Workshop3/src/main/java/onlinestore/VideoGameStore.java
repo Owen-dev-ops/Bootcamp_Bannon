@@ -2,7 +2,6 @@ package onlinestore;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class VideoGameStore {
@@ -54,11 +53,13 @@ public class VideoGameStore {
             case "rp", "remove-product":
                 shoppingCart = removeFromCart(shoppingCart, scanner, receipt);
                 break;
-            case "c (bonus)", "checkout":
-                // code
+            case "c", "checkout":
+                // checkout(scanner, shoppingCart, receipt);
+                System.out.println("Coming soon...");
                 break;
             case "e", "exit":
                 System.out.println("Goodbye");
+                scanner.close();
                 System.exit(0);
                 break;
             default:
@@ -186,9 +187,22 @@ public class VideoGameStore {
         return shoppingCart;
     }
 
-    /* public static Receipt checkOut(){
-        //
-        return receipt;
-    }*/
+    public static void checkout(Scanner scanner, List<Game> shoppingCart, Receipt receipt){
+        // get payment amount and compare to receipt.getReceiptTotal
 
-}      // Bonus: Checkout
+        // if enough calculate change owed if any, else say sorry not enough funds
+
+        // format receipt
+            // order date
+            // all receipt items with quantity of each game
+            // sales total
+            // amount paid
+            // change given
+
+        // write receipt info to receipts folder in a .txt file with file name yyyyMMdd-HHmmss
+
+        // clear shopping cart and receipt
+
+        System.out.println("Checked out successfully, returning you to main menu...");
+    }
+}

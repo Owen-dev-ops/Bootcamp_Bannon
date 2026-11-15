@@ -36,4 +36,13 @@ public class Receipt {
         receiptItems.remove(game);
     }
 
+    public int quantityOf(String gameSku){
+        int quantity = 0;
+        for(Game game : receiptItems){
+            if(game.getSku().equals(gameSku)){
+                quantity ++;
+            }
+        }
+        return quantity;
+    }
 }
