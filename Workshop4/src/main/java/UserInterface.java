@@ -1,5 +1,7 @@
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Scanner;
+
 import JavaHelpers.ColorCodes;
 
 public class UserInterface {
@@ -22,16 +24,17 @@ public class UserInterface {
          */
 
         UserInterface ui = new UserInterface(DealershipFileManager.getDealership());
-        ui.display();
+        while(true){
+            ui.display();
+        }
     }
 
     public void display() {
         System.out.printf("%sWelcome to LotFinder%s\n------------------------------------------\n", ColorCodes.GREEN_BACKGROUND, ColorCodes.RESET);
 
-        // Print Usage menu
         System.out.printf("%s%s%sLotFinder:%s\n" +
                 "%s1:%s Find Vehicles within a price range\n" +
-                "%s2:%s Find vehicles by makes / model\n" +
+                "%s2:%s Find vehicles by make / model\n" +
                 "%s3:%s Find vehicles by year range\n" +
                 "%s4:%s Find vehicles by color\n" +
                 "%s5:%s Find vehicles by mileage range\n" +
@@ -41,10 +44,42 @@ public class UserInterface {
                 "%s9:%s Remove a vehicle\n" +
                 "%s99:%s Quit", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.GREEN, ColorCodes.RESET, ColorCodes.YELLOW, ColorCodes.RESET, ColorCodes.YELLOW, ColorCodes.RESET, ColorCodes.YELLOW, ColorCodes.RESET, ColorCodes.YELLOW, ColorCodes.RESET,ColorCodes.YELLOW, ColorCodes.RESET,ColorCodes.YELLOW, ColorCodes.RESET,ColorCodes.YELLOW, ColorCodes.RESET,ColorCodes.YELLOW, ColorCodes.RESET,ColorCodes.YELLOW, ColorCodes.RESET, ColorCodes.YELLOW, ColorCodes.RESET);
 
-        // get user input
+        Scanner scanner = new Scanner(System.in);
+        String userInput = scanner.nextLine();
 
         // switch case for userInput matching there input to the correct process function
-
+        switch (userInput){
+            case "1", "price-range":
+                processGetByPriceRequest();
+                break;
+            case "2", "make-model":
+                processGetByMakeModelRequest();
+                break;
+            case "3", "year-range":
+                processGetByYearRequest();
+                break;
+            case "4", "color":
+                processGetByColorRequest();
+                break;
+            case "5", "mileage-range":
+                processGetByMileageRequest();
+                break;
+            case "6", "type":
+                processGetByVehicleRequest();
+                break;
+            case "7", "show-all":
+                processGetAllVehiclesRequest();
+                break;
+            case "8", "add-vehicle":
+                processAddVehicleRequest();
+                break;
+            case "9", "remove-vehicle":
+                processRemoveVehicleRequest();
+                break;
+            case "10", "quit":
+                System.exit(0);
+                break;
+        }
     }
 
     public void processGetByPriceRequest() {

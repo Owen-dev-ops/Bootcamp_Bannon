@@ -10,6 +10,7 @@ public class VideoGameStore {
         Scanner scanner = new Scanner(System.in);
         List<Game> inventory = FileManager.readFile();
         List<Game> shoppingCart = new ArrayList<>();
+        Receipt receipt = new Receipt(shoppingCart);
         String userInput = "";
 
         System.out.printf("%sWelcome to Pixel and Potion game store%s\n", Constants.BOLD, Constants.RESET);
@@ -17,7 +18,7 @@ public class VideoGameStore {
         while (true) {
             displayMenu();
             userInput = scanner.nextLine().toLowerCase();
-            directUser(userInput, inventory, shoppingCart, scanner);
+            directUser(userInput, inventory, shoppingCart, scanner, receipt);
         }
     }
 
@@ -36,22 +37,22 @@ public class VideoGameStore {
     }
 
     // Direct user based off input
-    public static void directUser(String userInput, List<Game> inventory, List<Game> shoppingCart, Scanner scanner) {
+    public static void directUser(String userInput, List<Game> inventory, List<Game> shoppingCart, Scanner scanner, Receipt receipt) {
         switch (userInput) {
             case "va", "view-all":
                 displayAllProducts(inventory);
                 break;
             case "dc", "display-cart":
-                displayCart(shoppingCart);
+                displayCart(shoppingCart, receipt);
                 break;
             case "sp", "search-product":
                 searchForProduct(inventory, scanner);
                 break;
             case "ap", "add-product":
-                shoppingCart = addToCart(inventory, shoppingCart, scanner);
+                shoppingCart = addToCart(inventory, shoppingCart, scanner, receipt);
                 break;
             case "rp", "remove-product":
-                shoppingCart = removeFromCart(shoppingCart, scanner);
+                shoppingCart = removeFromCart(shoppingCart, scanner, receipt);
                 break;
             case "c (bonus)", "checkout":
                 // code
@@ -80,7 +81,7 @@ public class VideoGameStore {
     }
 
     // Display all products in the cart
-    public static void displayCart(List<Game> shoppingCart) {
+    public static void displayCart(List<Game> shoppingCart, Receipt receipt) {
         System.out.println("------------------------------------------------------");
         System.out.printf("%sShopping Cart: %s\n", Constants.BOLD, Constants.RESET);
         if (shoppingCart.isEmpty()) {
@@ -93,6 +94,7 @@ public class VideoGameStore {
                     "%sSKU%s: %s\n" +
                     "|\n", Constants.BOLD, Constants.RESET, game.getName(), Constants.BOLD, Constants.RESET, game.getPrice(), Constants.BOLD, Constants.RESET, game.getSku());
         }
+        System.out.printf("Cart Total: $%.2f\n", receipt.getReceiptTotal());
         System.out.println("------------------------------------------------------");
         System.out.println("What would you like to do next?");
     }
@@ -138,7 +140,7 @@ public class VideoGameStore {
 
 
     // Add a product to the cart
-    public static List<Game> addToCart(List<Game> inventory, List<Game> shoppingCart, Scanner scanner) {
+    public static List<Game> addToCart(List<Game> inventory, List<Game> shoppingCart, Scanner scanner, Receipt receipt) {
         System.out.println("What game would you like to add to cart?:");
         String userInput = scanner.nextLine().toLowerCase();
         boolean isEmpty = true;
@@ -148,6 +150,7 @@ public class VideoGameStore {
             if (game.getName().toLowerCase().contains(userInput) || game.getSku().toLowerCase().contains(userInput)) {
                 System.out.printf("%s successfully added to cart\n", game.getName());
                 shoppingCart.add(game);
+                receipt.addGame(game);
                 isEmpty = false;
                 break;
             }
@@ -161,7 +164,7 @@ public class VideoGameStore {
 
 
     // Remove item from cart
-    public static List<Game> removeFromCart(List<Game> shoppingCart, Scanner scanner) {
+    public static List<Game> removeFromCart(List<Game> shoppingCart, Scanner scanner, Receipt receipt) {
         System.out.println("What game would you like to remove from your cart?");
         String userInput = scanner.nextLine().toLowerCase();
         boolean isEmpty = true;
@@ -172,6 +175,7 @@ public class VideoGameStore {
                 System.out.printf("%s successfully removed from cart\n", game.getName());
                 isEmpty = false;
                 shoppingCart.remove(game);
+                receipt.removeGame(game);
                 break;
             }
         }
@@ -182,9 +186,9 @@ public class VideoGameStore {
         return shoppingCart;
     }
 
-    public static Receipt checkOut(){
-
+    /* public static Receipt checkOut(){
+        //
         return receipt;
-    }
+    }*/
 
 }      // Bonus: Checkout

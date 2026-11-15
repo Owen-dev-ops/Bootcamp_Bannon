@@ -1,5 +1,6 @@
 package onlinestore;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Receipt {
@@ -8,14 +9,16 @@ public class Receipt {
     private List<Game> receiptItems;
 
     public Receipt(List<Game> receiptItems) {
-        this.receiptItems = receiptItems;
+        this.receiptItems = new ArrayList<>(receiptItems);
     }
 
     public float getReceiptTotal() {
+        receiptTotal = 0;
+        for(Game game : receiptItems){
+            receiptTotal += game.getPrice();
+        }
         return receiptTotal;
     }
-
-
 
     public List<Game> getReceiptItems() {
         return receiptItems;
@@ -25,11 +28,12 @@ public class Receipt {
         this.receiptItems = receiptItems;
     }
 
-    // methods
+    public void addGame(Game game){
+        receiptItems.add(game);
+    }
 
-        // confirmEnough (make sure the users entered cash amount is equal to or greater than this.amount)
-            // if so printReceipt(), else return to user they dont have enough funds
-        // print receipt
-
+    public void removeGame(Game game){
+        receiptItems.remove(game);
+    }
 
 }
