@@ -14,13 +14,21 @@ public class Dealership {
         this.phone = phone;
     }
 
-    /*
+
     public String getPhone() {
         return phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public ArrayList<Vehicle> getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(List<Vehicle> inventory){
+        this.inventory = new ArrayList<>(inventory);
     }
 
     public String getName() {
@@ -31,43 +39,40 @@ public class Dealership {
         return address;
     }
 
-    public ArrayList<Vehicle> getInventory() {
-        return inventory;
-    }
 
     public List<Vehicle> getVehiclesByPrice(BigDecimal min, BigDecimal max) {
-
+        return null;
     }
 
     public List<Vehicle> getVehiclesByMakeModel(String make, String model){
-
+        return null;
     }
 
     public List<Vehicle> getVehiclesByYear(int min, int max){
-
+        return null;
     }
 
     public List<Vehicle> getVehiclesByColor(String color){
-
+        return null;
     }
 
     public List<Vehicle> getVehiclesByMileage(int min, int max){
-
+        return null;
     }
 
     public List<Vehicle> getVehiclesByType(String vehicleType){
-
+        return null;
     }
 
     public List<Vehicle> getAllVehicles(){
+        return this.inventory;
+    }
+
+    public void addVehicle(Vehicle vehicle){
 
     }
 
-    public void addVehicle(Vehicle){
+    public void removeVehicle(Vehicle vehicle){
 
     }
-
-    public void removeVehicle(Vehicle){
-
-    } */
 }

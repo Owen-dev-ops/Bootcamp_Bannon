@@ -24,15 +24,16 @@ public class UserInterface {
          */
 
         UserInterface ui = new UserInterface(DealershipFileManager.getDealership());
+        ui.dealership.setInventory(DealershipFileManager.readInventory());
+        System.out.printf("%sWelcome to LotFinder%s\n", ColorCodes.GREEN_BACKGROUND, ColorCodes.RESET);
         while(true){
             ui.display();
         }
     }
 
     public void display() {
-        System.out.printf("%sWelcome to LotFinder%s\n------------------------------------------\n", ColorCodes.GREEN_BACKGROUND, ColorCodes.RESET);
 
-        System.out.printf("%s%s%sLotFinder:%s\n" +
+        System.out.printf("------------------------------------------\n%s%s%sLotFinder:%s\n" +
                 "%s1:%s Find Vehicles within a price range\n" +
                 "%s2:%s Find vehicles by make / model\n" +
                 "%s3:%s Find vehicles by year range\n" +
@@ -42,7 +43,7 @@ public class UserInterface {
                 "%s7:%s List ALL vehicles\n" +
                 "%s8:%s Add a vehicle\n" +
                 "%s9:%s Remove a vehicle\n" +
-                "%s99:%s Quit", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.GREEN, ColorCodes.RESET, ColorCodes.YELLOW, ColorCodes.RESET, ColorCodes.YELLOW, ColorCodes.RESET, ColorCodes.YELLOW, ColorCodes.RESET, ColorCodes.YELLOW, ColorCodes.RESET,ColorCodes.YELLOW, ColorCodes.RESET,ColorCodes.YELLOW, ColorCodes.RESET,ColorCodes.YELLOW, ColorCodes.RESET,ColorCodes.YELLOW, ColorCodes.RESET,ColorCodes.YELLOW, ColorCodes.RESET, ColorCodes.YELLOW, ColorCodes.RESET);
+                "%s99:%s Quit\n------------------------------------------\n>", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.GREEN, ColorCodes.RESET, ColorCodes.YELLOW, ColorCodes.RESET, ColorCodes.YELLOW, ColorCodes.RESET, ColorCodes.YELLOW, ColorCodes.RESET, ColorCodes.YELLOW, ColorCodes.RESET,ColorCodes.YELLOW, ColorCodes.RESET,ColorCodes.YELLOW, ColorCodes.RESET,ColorCodes.YELLOW, ColorCodes.RESET,ColorCodes.YELLOW, ColorCodes.RESET,ColorCodes.YELLOW, ColorCodes.RESET, ColorCodes.YELLOW, ColorCodes.RESET);
 
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine();
@@ -107,7 +108,7 @@ public class UserInterface {
     }
 
     public void processGetAllVehiclesRequest() {
-
+        displayVehicles(dealership.getAllVehicles());
     }
 
     public void processAddVehicleRequest() {
@@ -116,5 +117,11 @@ public class UserInterface {
 
     public void processRemoveVehicleRequest() {
 
+    }
+
+    private void displayVehicles(List<Vehicle> vehicles){
+        for(Vehicle vehicle : vehicles){
+            vehicle.printVehicleInfo();
+        }
     }
 }
