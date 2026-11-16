@@ -134,7 +134,27 @@ public class UserInterface {
     }
 
     public void processGetByMakeModelRequest() {
+        Scanner scanner = new Scanner(System.in);
+        boolean validAnswer = false;
+        List <Vehicle> searchResults = new ArrayList<>();
 
+        System.out.printf("%s%sEnter the make and model%s:\n>", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.RESET);
+        String makeAndModel = scanner.nextLine().trim().toLowerCase();
+        for (Vehicle vehicle : dealership.getInventory()) {
+            String combinedMakeModel = (vehicle.getMake() + " " + vehicle.getModel()).toLowerCase();
+            if (combinedMakeModel.contains(makeAndModel)) {
+                searchResults.add(vehicle);
+            }else if(vehicle.getMake().toLowerCase().contains(makeAndModel) || vehicle.getModel().toLowerCase().contains(makeAndModel)){
+                searchResults.add(vehicle);
+            }
+        }
+
+        if(searchResults.isEmpty()){
+            System.out.println("-----------------------\nNo search results\n-----------------------");
+        }else{
+            System.out.printf("\n%s%sSearch Results%s:\n ", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.RESET);
+            displayVehicles(searchResults);
+        }
     }
 
     public void processGetByYearRequest() {
