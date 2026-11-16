@@ -1,3 +1,5 @@
+import JavaHelpers.ColorCodes;
+
 import java.math.BigDecimal;
 
 public class Vehicle {
@@ -62,15 +64,16 @@ public class Vehicle {
     }
 
     public void printVehicleInfo(){
-        System.out.printf("Vin %d,\n" +
-                "Year: %d\n" +
-                "Make: %s\n" +
-                "Model: %s\n" +
-                "Vehicle Type: %s\n" +
-                "Color: %s\n" +
-                "Odometer: %d\n" +
-                "Price: %s\n" +
-                "-----------------------------\n", vin, year, make, model, vehicleType, color, odometer, price);
+        // TODO: Make this print like the table in Capstone1
+        System.out.printf("\n%s%sVin%s: %-15s" +
+                "%s%sYear%s: %-15s" +
+                "%s%sMake%s: %-15s" +
+                "%s%sModel%s: %-15s" +
+                "%s%sVehicle Type%s: %-15s" +
+                "%s%sColor%s: %-15s" +
+                "%s%sOdometer%s: %-15s" +
+                "%s%sPrice%s: %-15s\n" +
+                "--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n", ColorCodes.BOLD, ColorCodes.BLUE, ColorCodes.RESET, vin, ColorCodes.BOLD, ColorCodes.BLUE, ColorCodes.RESET, year, ColorCodes.BOLD, ColorCodes.BLUE, ColorCodes.RESET, make, ColorCodes.BOLD, ColorCodes.BLUE, ColorCodes.RESET, model, ColorCodes.BOLD, ColorCodes.BLUE, ColorCodes.RESET, vehicleType, ColorCodes.BOLD, ColorCodes.BLUE, ColorCodes.RESET, color, ColorCodes.BOLD, ColorCodes.BLUE, ColorCodes.RESET, odometer, ColorCodes.BOLD, ColorCodes.BLUE, ColorCodes.RESET, price);
     }
 
 }

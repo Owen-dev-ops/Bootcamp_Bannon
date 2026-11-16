@@ -1,4 +1,6 @@
+import java.awt.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,17 +14,6 @@ public class UserInterface {
     }
 
     public static void run() {
-
-        // Test file manager read and write functions
-        /*
-        List<Vehicle> vehicles = DealershipFileManager.readInventory();
-        for(Vehicle vehicle : vehicles){
-            vehicle.printVehicleInfo();
-        }
-        Vehicle test = new Vehicle(44506, 2000, "honda", "civic", "car", "blue", 25025, BigDecimal.valueOf(10000));
-        DealershipFileManager.writeToInventory(test);
-         */
-
         UserInterface ui = new UserInterface(DealershipFileManager.getDealership());
         ui.dealership.setInventory(DealershipFileManager.readInventory());
         System.out.printf("%sWelcome to LotFinder%s\n", ColorCodes.GREEN_BACKGROUND, ColorCodes.RESET);
@@ -31,9 +22,10 @@ public class UserInterface {
         }
     }
 
+
     public void display() {
 
-        System.out.printf("------------------------------------------\n%s%s%sLotFinder:%s\n" +
+        System.out.printf("\n%s%s%sLotFinder:%s\n" +
                 "%s1:%s Find Vehicles within a price range\n" +
                 "%s2:%s Find vehicles by make / model\n" +
                 "%s3:%s Find vehicles by year range\n" +
@@ -77,14 +69,68 @@ public class UserInterface {
             case "9", "remove-vehicle":
                 processRemoveVehicleRequest();
                 break;
-            case "10", "quit":
+            case "99", "quit":
+                System.out.println("Goodbye");
                 System.exit(0);
                 break;
         }
     }
 
     public void processGetByPriceRequest() {
+        Scanner scanner = new Scanner(System.in);
+        boolean validAnswer = false;
+        BigDecimal zero = new BigDecimal(0);
+        BigDecimal low = null;
+        BigDecimal high = null;
+        
+        // Get low price and validate users input
+        while(!validAnswer){
+            System.out.printf("%s%sEnter low price%s: \n>", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.RESET);
+            try{
+                low = scanner.nextBigDecimal();
+                if(low.compareTo(zero) == -1){
+                    System.out.println("Low price must be positive");
+                    throw new RuntimeException();
+                }
+                validAnswer = true;
+            }catch(Exception ex){
+                scanner.nextLine();
+                System.out.println("Please enter a valid dollar amount");
+            }
+        }
+        validAnswer = false;
 
+        // get high price and validate users input
+        while(!validAnswer){
+            System.out.printf("%s%sEnter high price%s: \n>", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.RESET);
+            try{
+                high = scanner.nextBigDecimal();
+                if(high.compareTo(zero) == -1){
+                    System.out.println("High price must be positive");
+                    throw new RuntimeException();
+                }else if(high.compareTo(low) == -1){
+                    System.out.println("High price must be higher than low price");
+                    throw new RuntimeException();
+                }
+                validAnswer = true;
+            }catch(Exception ex){
+                scanner.nextLine();
+                System.out.println("Please enter a valid dollar amount");
+            }
+        }
+
+        List<Vehicle> searchResults = new ArrayList<>();
+        for(Vehicle vehicle : dealership.getInventory()){
+            if(vehicle.getPrice().compareTo(low) == 1 && vehicle.getPrice().compareTo(high) == -1){
+                searchResults.add(vehicle);
+            }
+        }
+        if(searchResults.isEmpty()){
+            System.out.println("-----------------------\nNo search results\n-----------------------");
+        }else{
+            System.out.printf("\n%s%sSearch Results%s:\n ", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.RESET);
+            displayVehicles(searchResults);
+        }
     }
 
     public void processGetByMakeModelRequest() {
@@ -108,6 +154,7 @@ public class UserInterface {
     }
 
     public void processGetAllVehiclesRequest() {
+        System.out.printf("\n%s%sAll Vehicles%s:\n ", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.RESET);
         displayVehicles(dealership.getAllVehicles());
     }
 
