@@ -1,4 +1,3 @@
-import java.awt.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -131,7 +130,6 @@ public class UserInterface {
 
     public void processGetByMakeModelRequest() {
         Scanner scanner = new Scanner(System.in);
-        boolean validAnswer = false;
         List <Vehicle> searchResults = new ArrayList<>();
 
         System.out.printf("%s%sEnter the make and model%s:\n>", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.RESET);
@@ -151,43 +149,31 @@ public class UserInterface {
     public void processGetByYearRequest() {
         Scanner scanner = new Scanner(System.in);
         List<Vehicle> searchResults = new ArrayList<>();
+        String userInput = "";
         boolean validAnswer = false;
         int lowYear = 0;
         int highYear = 0;
 
         while(!validAnswer){
             System.out.printf("%s%sEnter vehicle year (low)%s:\n>", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.RESET);
-            String userInput = scanner.nextLine();
-            try {
-                lowYear = Integer.parseInt(userInput);
-                if(lowYear < 0){
-                    System.out.println("Year must be positive");
-                    throw new RuntimeException();
-                }
-                validAnswer = true;
-            }catch(Exception ex){
-                System.out.println("Please enter a valid year");
-            }
+            userInput = scanner.nextLine();
+            validAnswer = validateInt(userInput);
         }
+        lowYear = Integer.parseInt(userInput);
         validAnswer = false;
 
-        // get high year
-        while(!validAnswer){
+        while(!validAnswer) {
             System.out.printf("%s%sEnter vehicle year (high)%s:\n>", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.RESET);
-            String userInput = scanner.nextLine();
-            try {
-                highYear = Integer.parseInt(userInput);
-                if(highYear < 0){
-                    System.out.println("Year must be positive");
-                    throw new RuntimeException();
+            userInput = scanner.nextLine();
+            if(validateInt(userInput)){
+                if(Integer.parseInt(userInput) < lowYear){
+                    System.out.println("Please enter a year greater than the low year");
+                }else{
+                    validAnswer = true;
                 }
-                validAnswer = true;
-            }catch(Exception ex){
-                System.out.println("Please enter a valid year");
             }
         }
-
-        // change if statment below to find range between high and low year
+        highYear = Integer.parseInt(userInput);
 
         for(Vehicle vehicle : dealership.getInventory()){
             if(vehicle.getYear() >= lowYear && vehicle.getYear() <= highYear){
@@ -213,11 +199,55 @@ public class UserInterface {
     }
 
     public void processGetByMileageRequest() {
+        Scanner scanner = new Scanner(System.in);
+        List<Vehicle> searchResults = new ArrayList<>();
+        String userInput = "";
+        boolean validAnswer = false;
+        int lowMileage = 0;
+        int highMileage = 0;
 
+        while(!validAnswer){
+            System.out.printf("%s%sEnter mileage (low)%s:\n>", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.RESET);
+            userInput = scanner.nextLine();
+            validAnswer = validateInt(userInput);
+        }
+        lowMileage = Integer.parseInt(userInput);
+        validAnswer = false;
+
+        while(!validAnswer){
+            System.out.printf("%s%sEnter mileage (high)%s:\n>", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.RESET);
+            userInput = scanner.nextLine();
+            if(validateInt(userInput)){
+                if(Integer.parseInt(userInput) < lowMileage){
+                    System.out.println("Please enter a mileage greater than the low mileage");
+                }else{
+                    validAnswer = true;
+                }
+            }
+        }
+        highMileage = Integer.parseInt(userInput);
+
+        for(Vehicle vehicle : dealership.getInventory()){
+            if(vehicle.getOdometer() >= lowMileage && vehicle.getOdometer() <= highMileage){
+                searchResults.add(vehicle);
+            }
+        }
+        displayVehicles(searchResults);
     }
 
     public void processGetByVehicleRequest() {
+        Scanner scanner = new Scanner(System.in);
+        List <Vehicle> searchResults = new ArrayList<>();
 
+        System.out.printf("%s%sEnter the vehicle type%s:\n>", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.RESET);
+        String type = scanner.nextLine().trim().toLowerCase();
+        for (Vehicle vehicle : dealership.getInventory()) {
+            if (vehicle.getVehicleType().contains(type)) {
+                searchResults.add(vehicle);
+            }
+        }
+
+        displayVehicles(searchResults);
     }
 
     public void processGetAllVehiclesRequest() {
@@ -242,5 +272,25 @@ public class UserInterface {
         for(Vehicle vehicle : vehicles){
             vehicle.printVehicleInfo();
         }
+    }
+
+    // TODO: Consolidate repetitive user input validation code above within the process methods
+    private boolean validateInt(String input) {
+        boolean validAnswer = false;
+        try{
+            int num = Integer.parseInt(input);
+            if(num < 0){
+                System.out.println("Input must be positive");
+                throw new RuntimeException();
+            }
+            validAnswer = true;
+        }catch(Exception ex){
+            System.out.println("Please enter a valid integer value");
+        }
+        return validAnswer;
+    }
+
+    private boolean validateBigDecimal(BigDecimal input){
+        return true;
     }
 }
