@@ -125,12 +125,8 @@ public class UserInterface {
                 searchResults.add(vehicle);
             }
         }
-        if(searchResults.isEmpty()){
-            System.out.println("-----------------------\nNo search results\n-----------------------");
-        }else{
-            System.out.printf("\n%s%sSearch Results%s:\n ", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.RESET);
-            displayVehicles(searchResults);
-        }
+
+        displayVehicles(searchResults);
     }
 
     public void processGetByMakeModelRequest() {
@@ -149,20 +145,71 @@ public class UserInterface {
             }
         }
 
-        if(searchResults.isEmpty()){
-            System.out.println("-----------------------\nNo search results\n-----------------------");
-        }else{
-            System.out.printf("\n%s%sSearch Results%s:\n ", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.RESET);
-            displayVehicles(searchResults);
-        }
+        displayVehicles(searchResults);
     }
 
     public void processGetByYearRequest() {
+        Scanner scanner = new Scanner(System.in);
+        List<Vehicle> searchResults = new ArrayList<>();
+        boolean validAnswer = false;
+        int lowYear = 0;
+        int highYear = 0;
 
+        while(!validAnswer){
+            System.out.printf("%s%sEnter vehicle year (low)%s:\n>", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.RESET);
+            String userInput = scanner.nextLine();
+            try {
+                lowYear = Integer.parseInt(userInput);
+                if(lowYear < 0){
+                    System.out.println("Year must be positive");
+                    throw new RuntimeException();
+                }
+                validAnswer = true;
+            }catch(Exception ex){
+                System.out.println("Please enter a valid year");
+            }
+        }
+        validAnswer = false;
+
+        // get high year
+        while(!validAnswer){
+            System.out.printf("%s%sEnter vehicle year (high)%s:\n>", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.RESET);
+            String userInput = scanner.nextLine();
+            try {
+                highYear = Integer.parseInt(userInput);
+                if(highYear < 0){
+                    System.out.println("Year must be positive");
+                    throw new RuntimeException();
+                }
+                validAnswer = true;
+            }catch(Exception ex){
+                System.out.println("Please enter a valid year");
+            }
+        }
+
+        // change if statment below to find range between high and low year
+
+        for(Vehicle vehicle : dealership.getInventory()){
+            if(vehicle.getYear() >= lowYear && vehicle.getYear() <= highYear){
+                searchResults.add(vehicle);
+            }
+        }
+        displayVehicles(searchResults);
     }
 
     public void processGetByColorRequest() {
+        Scanner scanner = new Scanner(System.in);
+        List<Vehicle> searchResults = new ArrayList<>();
+        boolean validAnswer = false;
 
+        System.out.printf("%s%sEnter vehicle color (low)%s:\n>", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.RESET);
+        String color = scanner.nextLine().trim();
+        for(Vehicle vehicle : dealership.getInventory()){
+            if(vehicle.getColor().contains(color)){
+                searchResults.add(vehicle);
+            }
+        }
+        displayVehicles(searchResults);
     }
 
     public void processGetByMileageRequest() {
@@ -187,6 +234,11 @@ public class UserInterface {
     }
 
     private void displayVehicles(List<Vehicle> vehicles){
+        if(vehicles.isEmpty()){
+            System.out.println("-----------------------\nNo search results\n-----------------------");
+        }else{
+            System.out.printf("\n%s%sSearch Results%s:\n ", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.RESET);
+        }
         for(Vehicle vehicle : vehicles){
             vehicle.printVehicleInfo();
         }
