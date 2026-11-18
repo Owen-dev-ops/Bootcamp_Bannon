@@ -256,7 +256,50 @@ public class UserInterface {
     }
 
     public void processAddVehicleRequest() {
+        boolean validAnswer = false;
+        System.out.printf("%s%sAdding New Vehicle%s:", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.RESET);
 
+        while(!validAnswer){
+            System.out.printf("%s%sVin%s:\n>", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.RESET);
+            // get vin
+
+            System.out.printf("%s%sYear%s:\n>", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.RESET);
+            // get year
+
+            System.out.printf("%s%sMake%s:\n>", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.RESET);
+            // get make
+
+            System.out.printf("%s%sModel%s:\n>", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.RESET);
+            // get model
+
+            System.out.printf("%s%sVehicle Type%s:\n>", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.RESET);
+            // get vehicle type
+
+            System.out.printf("%s%sColor%s:\n>", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.RESET);
+            // get color
+
+            System.out.printf("%s%sOdometer%s:\n>", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.RESET);
+            // get odometer
+
+            System.out.printf("%s%sPrice%s:\n>", ColorCodes.BOLD, ColorCodes.UNDERLINE, ColorCodes.RESET);
+            // get price
+
+            try{
+                Vehicle newVehicle = new Vehicle(use the values gotten above to make new Vehicle here);
+                validAnswer = true;
+            }catch(Exception ex){
+                System.out.printf("\nINVALID NEW VEHICLE ENTRY\nExample Format:\n" +
+                        "VIN: 1G1AF1F57A7192174\n" +
+                        "Year: 2012\n" +
+                        "Make: Honda\n" +
+                        "Model: Civic\n" +
+                        "Vehicle Type: Car\n" +
+                        "Color: Blue\n" +
+                        "Odometer: 50575\n" +
+                        "Price: 36,075.00\n");
+            }
+            dealership.addVehicle(newVehicle);
+        }
     }
 
     public void processRemoveVehicleRequest() {
@@ -275,6 +318,7 @@ public class UserInterface {
     }
 
     // TODO: Consolidate repetitive user input validation code above within the process methods
+    // TODO: Turn ValidateInput into an interface. Then a class for each input validation type implementing the validInput function which takes String userInput
     private boolean validateInt(String input) {
         boolean validAnswer = false;
         try{
@@ -290,7 +334,16 @@ public class UserInterface {
         return validAnswer;
     }
 
+    private boolean validateGreaterThanInt(int input){
+        return true;
+    }
+
     private boolean validateBigDecimal(BigDecimal input){
         return true;
     }
+
+    private boolean validateGreaterThanBigDecimal(){
+        return true;
+    }
+
 }
